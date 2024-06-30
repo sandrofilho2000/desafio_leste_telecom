@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
-
+from rest_framework.permissions import AllowAny
 from contacts.models import Contact
 from contacts.serializers import ContactSerializer
 
@@ -10,6 +10,7 @@ from contacts.serializers import ContactSerializer
 class ContactDetailView(generics.GenericAPIView):
     serializer_class = ContactSerializer
     queryset = Contact.objects.all()
+    permission_classes = [AllowAny]
 
     def get(self, request, *args, **kwargs):
         pk = kwargs.get("pk")

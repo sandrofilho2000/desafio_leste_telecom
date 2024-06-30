@@ -12,6 +12,7 @@ class Contact(models.Model):
     first_name = models.CharField(max_length=100, verbose_name="Nome")
     last_name = models.CharField(max_length=100, verbose_name="Sobrenome")
     email = models.CharField(max_length=100, verbose_name="E-mail")
+    language = models.CharField(max_length=100, verbose_name="Idioma")
     gender = models.CharField(
         max_length=1, choices=GENDER_CHOICES, verbose_name="Gênero"
     )

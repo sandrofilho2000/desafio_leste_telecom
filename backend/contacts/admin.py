@@ -12,10 +12,12 @@ class ContactAdmin(admin.ModelAdmin):
         "last_name",
         "email",
         "birthdate",
+        "language",
         "gender",
     ]
 
     list_display_links = ["first_name"]
+    list_editable = ["language"]
 
     def avatar_preview(self, obj):
 
