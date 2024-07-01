@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import React from 'react';
 import logo from 'public/assets/logo.svg';
+import SearchBar from '@components/cells/SearchBar';
 const Navbar = () => {
   return (
-    <nav className="bg-white border border-gray-200 sm:px-4 md:px-24 py-2.5 rounded">
+    <nav className="bg-white border border-gray-200 sm:px-4 px-8 md:px-16 lg:px-24 py-2.5 rounded">
       <div className="flex flex-wrap justify-between items-center">
         <a
           href="/"
@@ -17,29 +18,7 @@ const Navbar = () => {
             title="logo"
           />
         </a>
-
-        <div className="flex items-center">
-          <button
-            id="menu-toggle"
-            type="button"
-            className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 md:hidden"
-          >
-            <span className="sr-only">Open main menu</span>
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-              />
-            </svg>
-          </button>
-        </div>
+        <SearchBar />
       </div>
     </nav>
   );

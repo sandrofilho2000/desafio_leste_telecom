@@ -26,16 +26,10 @@ const ContactCard = ({
     setAge(today.getFullYear() - birthDate.getFullYear());
   }, []);
 
-  const gridLayout =
-    'bg-white border border-white shadow-[0_3px_10px_rgb(0,0,0,0.1)] hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-xl mx-auto p-4 gap-4 flex-col [&>.contactCardAvatar>img]:h-28 [&>.contactCardAvatar>img]:mt-[-40px] [&>.contactCardAvatar>img]:shadow-[0_3px_10px_rgb(0,0,0,0.1)] [&>.contactCardInfo>h2]:text-center  [&>.contactCardInfo>.cardInfo]:mx-auto [&>.contactCardButtons]:w-full [&>.contactCardButtons]:justify-between';
-
-  const listLayout =
-    'w-full rounded-b-[0px] [&>.contactCardAvatar>img]:w-[100px] [&>.contactCardAvatar>img]:h-[100px] pb-[60px] [&>.contactCardInfo]:absolute [&>.contactCardInfo]:left-[120px] [&>.contactCardInfo]:transform  [&>.contactCardButtons]:absolute [&>.contactCardButtons]:bottom-3 [&>.contactCardButtons]:left-0';
-
   return (
     <div
-      className={`relative flex justify-between items-center sm:flex border  border-b-[#00937333] pb-4 ${
-        layoutMode === 'list' ? listLayout : gridLayout
+      className={`contactCard relative flex justify-between items-center sm:flex border  border-b-[#00937333] pb-4 ${
+        layoutMode === 'list' ? 'listLayout' : 'gridLayout'
       }`}
     >
       <ContactCardAvatar

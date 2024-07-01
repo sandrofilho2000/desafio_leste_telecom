@@ -13,17 +13,15 @@ class ContactDetailView(generics.GenericAPIView):
     permission_classes = [AllowAny]
 
     def get(self, request, *args, **kwargs):
-        pk = kwargs.get("pk")
+        slug = request.query_params.get("slug")
 
-        if pk:
-            instance = get_object_or_404(self.get_queryset(), pk=pk)
-            contacts = [instance]
-        else:
-            instances = self.get_queryset()
-            contacts = self.get_serializer(instances, many=True).data
+        # Filter queryset based on query parameters if provided
+        queryset = self.get_queryset()
+        if slug:
+            queryset = queryset.filter(slug__icontains=slug)
 
-        if not contacts:
-            raise NotFound("No contacts found.")
+        contacts = self.get_serializer(queryset, many=True).data
 
         response_data = {"contacts": contacts}
+        print("RESPONSE DATA: ", response_data)
         return Response(response_data)

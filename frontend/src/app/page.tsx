@@ -1,7 +1,3 @@
-import ContactCard from '@components/organisms/ContactCard';
-import Navbar from '@components/organisms/Navbar';
-import Image from 'next/image';
-import data from 'public/mock.json';
 import { iContactItem } from '../interfaces';
 import axios from 'axios';
 import HomePage from '@components/HomePage';
@@ -25,5 +21,5 @@ async function api(path: string) {
 
 export default async function Home() {
   const { contacts }: { contacts: iContactItem[] } = await api('contacts');
-  return <HomePage contacts={contacts} />;
+  return <HomePage list={contacts} />;
 }

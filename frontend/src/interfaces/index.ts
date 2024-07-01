@@ -10,3 +10,8 @@ export interface iContactItem {
     age?: number;
     layoutMode?: string;
 }
+
+
+export interface iSearchContext {
+    term?: string;
+}

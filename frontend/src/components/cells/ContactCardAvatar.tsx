@@ -14,7 +14,7 @@ const ContactCardAvatar = ({
     <div className="contactCardAvatar relative sm:mb-0 mb-3">
       <Image
         src={avatar || 'placeholder'}
-        alt={full_name + 'image'}
+        alt={full_name + ' avatar'}
         width={112}
         height={112}
         className={'object-cover rounded-xl'}

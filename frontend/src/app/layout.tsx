@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { SystemContextProvider } from '@context/useSystem';
+import { ContactContextProvider } from '@context/useContact';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -12,8 +14,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    <SystemContextProvider>
+      <ContactContextProvider>
+        <html lang="en">
+          <body>{children}</body>
+        </html>
+      </ContactContextProvider>
+    </SystemContextProvider>
   );
 }
