@@ -2,8 +2,8 @@ import React from 'react';
 import { IoLanguage } from 'react-icons/io5';
 import { LiaBirthdayCakeSolid } from 'react-icons/lia';
 import { MdOutlineEmail } from 'react-icons/md';
-import { iContactItem } from '../../interfaces';
-
+import { formatDate } from '@utils/formatDate';
+import { iContactItem } from '@interfaces/index';
 const ContactCardInfo = ({
   full_name,
   age,
@@ -29,7 +29,7 @@ const ContactCardInfo = ({
         <span>
           <LiaBirthdayCakeSolid className="text-base" />
         </span>
-        <span>{birthdate}</span>
+        <span>{formatDate(birthdate)}</span>
       </div>
 
       <div className="cardInfo flex items-center gap-1 text-gray-500 text-sm">

@@ -1,10 +1,10 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { iContactItem } from '../../interfaces';
 import Button from '@components/atoms/Button';
 import ContactCardAvatar from '@components/cells/ContactCardAvatar';
 import ContactCardInfo from '@components/cells/ContactCardInfo';
 import ContactCardButtons from '@components/cells/ContactCardButtons';
+import { iContactItem } from '@interfaces/index';
 
 const ContactCard = ({
   contact,

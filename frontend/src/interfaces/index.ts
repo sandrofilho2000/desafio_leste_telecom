@@ -13,5 +13,8 @@ export interface iContactItem {
 
 
 export interface iSearchContext {
-    term?: string;
+    slug?: string;
+    gender?: string;
+    language?: string;
+    birthMonth?: string;
 }

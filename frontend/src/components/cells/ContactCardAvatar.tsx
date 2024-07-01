@@ -1,7 +1,7 @@
 import React from 'react';
 import { IoMdFemale } from 'react-icons/io';
 import { MdMale } from 'react-icons/md';
-import { iContactItem } from '../../interfaces';
+import { iContactItem } from '@interfaces/index';
 import Image from 'next/image';
 
 const ContactCardAvatar = ({
@@ -19,12 +19,12 @@ const ContactCardAvatar = ({
         height={112}
         className={'object-cover rounded-xl'}
       />
-      {gender == 'M' && (
+      {gender == 'male' && (
         <div className="gender absolute bottom-0 right-0 translate-x-[20%] translate-y-[20%] text-xl rounded-full bg-[#0ba5fe] text-white p-1">
           <MdMale />
         </div>
       )}
-      {gender == 'F' && (
+      {gender == 'female' && (
         <div className="gender absolute bottom-0 right-0 translate-x-[20%] translate-y-[20%] text-xl rounded-full bg-[#ee50aa] text-white p-1">
           <IoMdFemale />
         </div>

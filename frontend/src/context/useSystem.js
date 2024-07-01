@@ -7,6 +7,7 @@ export const useSystem = () => useContext(systemContext);
 
 export const SystemContextProvider = ({ children }) => {
   const [searchContext, setSearchContext] = useState({});
+  const [isFilterActive, setIsFilterActive] = useState(false);
   const [searchSkeletonOverlayActive, setSearchSkeletonOverlayActive] =
     useState(false);
 
@@ -17,6 +18,8 @@ export const SystemContextProvider = ({ children }) => {
         setSearchContext,
         searchSkeletonOverlayActive,
         setSearchSkeletonOverlayActive,
+        isFilterActive,
+        setIsFilterActive,
       }}
     >
       {children}

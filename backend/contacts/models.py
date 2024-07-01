@@ -6,8 +6,8 @@ from django.utils.text import slugify
 class Contact(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     GENDER_CHOICES = [
-        ("M", "Masculino"),
-        ("F", "Feminino"),
+        ("male", "Masculino"),
+        ("female", "Feminino"),
     ]
 
     first_name = models.CharField(max_length=100, verbose_name="Nome")
@@ -15,7 +15,7 @@ class Contact(models.Model):
     email = models.CharField(max_length=100, verbose_name="E-mail")
     language = models.CharField(max_length=100, verbose_name="Idioma")
     gender = models.CharField(
-        max_length=1, choices=GENDER_CHOICES, verbose_name="Gênero"
+        max_length=10, choices=GENDER_CHOICES, verbose_name="Gênero"
     )
     birthdate = models.DateField(verbose_name="Data de Nascimento")
     avatar = models.ImageField(

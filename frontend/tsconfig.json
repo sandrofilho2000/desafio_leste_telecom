@@ -20,8 +20,8 @@
     "paths": {
       "@components/*": ["./src/components/*"],
       "@context/*": ["./src/context/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@public/*": ["./public/*"]
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
   "include": [

@@ -9,24 +9,18 @@ const SearchBar = () => {
     searchContext,
     setSearchContext,
     setSearchSkeletonOverlayActive,
+    isFilterActive,
+    setIsFilterActive,
   }: any = useSystem();
 
-  const { contacts, setContacts, initialContacts, setInitialContacts }: any =
-    useContact();
-
   var typingTimer: any;
-  let handlePostSearchOverlay = (term: string) => {
+  let handleSkeletonOverlay = (slug: string) => {
     clearTimeout(typingTimer);
-    if (!term) {
+    setSearchSkeletonOverlayActive(true);
+    typingTimer = setTimeout(() => {
+      setSearchContext({ ...searchContext, slug: slug });
       setSearchSkeletonOverlayActive(false);
-      setContacts(initialContacts);
-    } else {
-      setSearchSkeletonOverlayActive(true);
-      typingTimer = setTimeout(() => {
-        setSearchContext({ ...searchContext, term: term });
-        setSearchSkeletonOverlayActive(false);
-      }, 1300);
-    }
+    }, 1300);
   };
 
   return (
@@ -38,7 +32,7 @@ const SearchBar = () => {
         <input
           type="search"
           onChange={(e) => {
-            handlePostSearchOverlay(e.target.value);
+            handleSkeletonOverlay(e.target.value);
           }}
           className="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none bg-transparent"
           placeholder="search"
@@ -47,7 +41,9 @@ const SearchBar = () => {
       </div>
       <div>
         <button
-          type="submit"
+          onClick={() => {
+            setIsFilterActive(!isFilterActive);
+          }}
           className="flex items-center bg-[#009373] justify-center w-12 h-12 text-[#e8ebea] rounded-r-lg text-lg"
         >
           <FaFilter />

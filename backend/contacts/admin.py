@@ -17,7 +17,7 @@ class ContactAdmin(admin.ModelAdmin):
     ]
 
     list_display_links = ["first_name"]
-    list_editable = ["language"]
+    list_editable = ["language", "gender"]
 
     def avatar_preview(self, obj):
 

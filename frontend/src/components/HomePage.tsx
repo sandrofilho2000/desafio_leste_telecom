@@ -10,6 +10,7 @@ import { useContact } from '@context/useContact';
 import { slugify } from '@utils/slugify';
 import axios from 'axios';
 import NotFound from './organisms/NotFound';
+import Filters from './organisms/Filters';
 
 const HomePage = ({ list }: { list: iContactItem[] }) => {
   const [layoutMode, setLayoutMode] = useState('grid');
@@ -18,16 +19,15 @@ const HomePage = ({ list }: { list: iContactItem[] }) => {
   const { contacts, setContacts, setInitialContacts }: any = useContact();
 
   async function api(searchContext: iSearchContext) {
-    let url = `http://localhost:8000/api/contacts`;
-    const { term } = searchContext;
-    if (term) {
-      url += `?slug=${slugify(term)}`;
+    let url = 'http://localhost:8000/api/contacts';
+    const { term, gender, language, birthMonth } = searchContext;
+    if (term || gender || language || birthMonth) {
       try {
-        const { data } = await axios.get(url);
+        const { data } = await axios.get(url, { params: searchContext });
         const { contacts: filteredContacts } = data;
         setContacts(filteredContacts);
       } catch (error) {
-        console.log('Erro na requisição:', error);
+        console.log('Error na requisição:', error);
         throw error;
       }
     }
@@ -40,13 +40,15 @@ const HomePage = ({ list }: { list: iContactItem[] }) => {
 
   useEffect(() => {
     api(searchContext);
+    console.log('🚀 ~ file: HomePage.tsx:45 ~ searchContext:', searchContext);
   }, [searchContext]);
 
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-[#e8ebea] px-8 md:px-16 lg:px-24 pt-8">
-        <div className="top w-full flex justify-between text-[#009373]">
+      <main className="min-h-screen bg-[#e8ebea] pt-0">
+        <Filters />
+        <div className="top w-full flex justify-between px-8 md:px-16 lg:px-24 text-[#009373]">
           <h1 className="text-4xl font-bold">Contacts</h1>
           <LayoutControl
             layoutMode={layoutMode}
@@ -54,7 +56,7 @@ const HomePage = ({ list }: { list: iContactItem[] }) => {
           />
         </div>
         <div
-          className={`contactsWrapper mt-10 ${
+          className={`contactsWrapper mt-10  px-8 md:px-16 lg:px-24 ${
             layoutMode === 'grid' ? 'gridLayout' : 'listLayout'
           }`}
         >
