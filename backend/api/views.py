@@ -76,6 +76,21 @@ class UpdateContactView(View):
             return JsonResponse({"error": str(e)}, status=500)
 
 
+@method_decorator(csrf_exempt, name="dispatch")
+class DeleteContactView(View):
+    permission_classes = [AllowAny]
+
+    def delete(self, request, id, *args, **kwargs):
+        try:
+            contact = Contact.objects.get(id=id)
+            contact.delete()
+            return JsonResponse({"message": "Contact deleted successfully"})
+        except Contact.DoesNotExist:
+            return JsonResponse({"error": "Contact not found"}, status=404)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+
+
 class ContactDetailView(generics.GenericAPIView):
     serializer_class = ContactSerializer
     queryset = Contact.objects.all()

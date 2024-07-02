@@ -1,9 +1,11 @@
 import Button from '@components/atoms/Button';
 import { useSystem } from '@context/useSystem';
 import { iContactItem } from '@interfaces/index';
+import axios from 'axios';
 import React, { useEffect } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { FaPencil } from 'react-icons/fa6';
+import Cookies from 'js-cookie';
 
 const ContactCardButtons = ({
   layoutMode = '',
@@ -19,12 +21,25 @@ const ContactCardButtons = ({
     setCurrContactEdit,
   }: any = useSystem();
 
-  /*   useEffect(() => {
-    console.log(
-      '🚀 ~ file: ContactCardButtons.tsx:25 ~ currContactEdit:',
-      currContactEdit
-    );
-  }, [currContactEdit]); */
+  const handleContactDelete = async (contactId: string) => {
+    const csrfToken = Cookies.get('csrftoken');
+    if (confirm('Do you really want to delete this contact?')) {
+      try {
+        const response = await axios.delete(
+          `http://localhost:8000/api/delete_contact/${contactId}/`,
+          {
+            headers: {
+              'X-CSRFToken': csrfToken,
+            },
+          }
+        );
+        alert('Contact deleted successfully!');
+        window.location.reload();
+      } catch (error) {
+        console.error('Error updating contact:', error);
+      }
+    }
+  };
 
   return (
     <div className="contactCardButtons flex items-center gap-1 h-9  text-sm text-gray-500">
@@ -40,7 +55,7 @@ const ContactCardButtons = ({
         classes="bg-red-400 hover:bg-red-500 hover:border-red-500 border-red-300"
         icon={<FaTrash />}
         handlefunction={() => {
-          confirm('Deseja realmente deletar este usuário?');
+          handleContactDelete(contact.id);
         }}
         text={layoutMode === 'grid' ? `DELETAR` : ''}
       />

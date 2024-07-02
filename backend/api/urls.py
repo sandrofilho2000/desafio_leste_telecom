@@ -6,6 +6,7 @@ from api.views import (
     CSRFTokenView,
     ContactDetailView,
     CreateContactView,
+    DeleteContactView,
     UpdateContactView,
 )
 
@@ -18,6 +19,11 @@ urlpatterns = [
         "api/update_contact/<uuid:id>/",
         UpdateContactView.as_view(),
         name="update_contact",
+    ),
+    path(
+        "api/delete_contact/<uuid:id>/",
+        DeleteContactView.as_view(),
+        name="delete_contact",
     ),
 ]
 

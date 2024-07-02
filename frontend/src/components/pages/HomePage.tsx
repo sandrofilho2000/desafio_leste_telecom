@@ -18,6 +18,7 @@ import ContactFormOverlay from '@components/organisms/ContactFormOverlay';
 
 const HomePage = ({ list }: { list: iContactItem[] }) => {
   const [layoutMode, setLayoutMode] = useState('grid');
+  const [firstLoad, setFirstLoad] = useState(true);
   const {
     searchContext,
     setSearchContext,
@@ -35,6 +36,7 @@ const HomePage = ({ list }: { list: iContactItem[] }) => {
         const { data } = await axios.get(url, { params: searchContext });
         const { contacts: filteredContacts } = data;
         setContacts(filteredContacts);
+        setFirstLoad(false);
       } catch (error) {
         console.log('Error na requisição:', error);
         throw error;
@@ -49,7 +51,6 @@ const HomePage = ({ list }: { list: iContactItem[] }) => {
 
   useEffect(() => {
     api(searchContext);
-    console.log('🚀 ~ file: HomePage.tsx:45 ~ searchContext:', searchContext);
   }, [searchContext]);
 
   return (
@@ -99,8 +100,15 @@ const HomePage = ({ list }: { list: iContactItem[] }) => {
                 />
               ))
             )
-          ) : (
+          ) : !firstLoad ? (
             <NotFound />
+          ) : (
+            Array.from({ length: 9 }).map((_, index) => (
+              <SkeletonCard
+                layoutMode={layoutMode}
+                key={index}
+              />
+            ))
           )}
         </div>
       </main>
