@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run generate-html && vite build",
+    "generate-html": "mkdir -p dist && cp index.html dist/",
     "start": "next start",
     "lint": "next lint"
   },

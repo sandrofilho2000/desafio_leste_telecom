@@ -1,11 +1,9 @@
 import { iContactItem } from '../interfaces';
 import axios from 'axios';
 import HomePage from '@components/pages/HomePage';
-import Cookies from 'js-cookie';
 
 async function api(path: string) {
   const url = `${process.env.API_URL}/${path}`;
-  console.log('🚀 ~ file: page.tsx:11 ~ url:', url);
 
   try {
     const res = await axios.get(url);
