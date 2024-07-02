@@ -8,11 +8,7 @@ async function api(path: string) {
   console.log('🚀 ~ file: page.tsx:11 ~ url:', url);
 
   try {
-    const res = await axios.get(url, {
-      headers: {
-        Authorization: `Api-Key ${process.env.API_KEY}`,
-      },
-    });
+    const res = await axios.get(url);
     return res.data;
   } catch (error) {
     console.error('Erro na requisição:', error);
