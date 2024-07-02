@@ -322,6 +322,8 @@ django_project/.dmypy.json
 backend/dmypy.json
 django_project/dmypy.json
 backend/credentials.json
+credentials.json
+
 # Pyre type checker
 backend/.pyre/
 django_project/.pyre/
@@ -344,3 +346,4 @@ django_project/cython_debug/
 
 # End of https://www.toptal.com/developers/gitignore/api/django
 ```
+backend/credentials.json
