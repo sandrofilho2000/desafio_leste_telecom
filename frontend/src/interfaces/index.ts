@@ -1,15 +1,24 @@
 export interface iContactItem {
-    id?: string;
-    first_name?: string,
-    last_name?: string,
-    full_name?: string;
-    email?: string,
-    gender?: string,
-    language?: string,
+    id: string;
+    first_name: string,
+    last_name: string,
+    full_name: string;
+    email: string,
+    gender: string,
+    language: string,
     avatar: string,
-    birthdate?: string,
-    age?: number;
+    birthdate: string,
+    age: number;
     layoutMode?: string;
+}
+
+export interface iContactCardInfo extends Pick<iContactItem, 'email' | 'birthdate' | 'language'> {
+    full_name: string;
+    age: number;
+}
+
+export interface iContactCardAvatar extends Pick<iContactItem, 'avatar' | 'gender'> {
+    full_name: string;
 }
 
 

@@ -3,15 +3,14 @@ import { IoLanguage } from 'react-icons/io5';
 import { LiaBirthdayCakeSolid } from 'react-icons/lia';
 import { MdOutlineEmail } from 'react-icons/md';
 import { formatDate } from '@utils/formatDate';
-import { iContactItem } from '@interfaces/index';
+import { iContactCardInfo } from '@interfaces/index';
 const ContactCardInfo = ({
   full_name,
   age,
-  layoutMode,
   email,
   birthdate,
   language,
-}: iContactItem) => {
+}: iContactCardInfo) => {
   return (
     <div className="contactCardInfo flex flex-col items-start gap-1">
       <h2 className="w-full flex-none text-lg text-[#009373] font-bold leading-none">

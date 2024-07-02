@@ -36,14 +36,12 @@ const ContactCard = ({
         full_name={first_name + ' ' + last_name}
         avatar={avatar}
         gender={gender}
-        layoutMode={layoutMode}
       />
 
       <ContactCardInfo
         full_name={first_name + ' ' + last_name}
         age={age}
         email={email}
-        gender={gender}
         birthdate={birthdate}
         language={language}
       />

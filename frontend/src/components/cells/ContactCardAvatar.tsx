@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react';
 import { IoMdFemale } from 'react-icons/io';
 import { MdMale } from 'react-icons/md';
-import { iContactItem } from '@interfaces/index';
-import Image from 'next/image';
+import { iContactCardAvatar } from '@interfaces/index';
 
 const ContactCardAvatar = ({
   full_name,
   avatar,
   gender,
-  layoutMode,
-}: iContactItem) => {
+}: iContactCardAvatar) => {
   return (
     <div className="contactCardAvatar relative sm:mb-0 mb-3">
       <img
