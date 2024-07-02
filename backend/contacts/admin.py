@@ -1,7 +1,11 @@
+import os
 from django.contrib import admin
 from django.contrib import admin
 from django.utils.html import format_html
 from contacts.models import Contact
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 @admin.register(Contact)
@@ -23,8 +27,9 @@ class ContactAdmin(admin.ModelAdmin):
 
         return format_html(
             """<div style="display: flex; align-items: center; gap: 4px">
-                <img style='width: 50px; height: 50px; border-radius: 50%;object-fit: cover' src='http://localhost:8000/media/{}'/>
+                <img style='width: 50px; height: 50px; border-radius: 50%;object-fit: cover; background-color: white; border: 2px solid #417690' src='{}{}'/>
             </div>""",
+            os.environ.get("MEDIA_URL"),
             str(obj.avatar),
         )
 

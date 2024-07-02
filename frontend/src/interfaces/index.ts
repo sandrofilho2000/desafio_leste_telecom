@@ -6,7 +6,7 @@ export interface iContactItem {
     email?: string,
     gender?: string,
     language?: string,
-    avatar?: string,
+    avatar: string,
     birthdate?: string,
     age?: number;
     layoutMode?: string;

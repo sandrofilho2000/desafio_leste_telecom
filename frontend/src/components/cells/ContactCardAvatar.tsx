@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IoMdFemale } from 'react-icons/io';
 import { MdMale } from 'react-icons/md';
 import { iContactItem } from '@interfaces/index';
@@ -12,8 +12,8 @@ const ContactCardAvatar = ({
 }: iContactItem) => {
   return (
     <div className="contactCardAvatar relative sm:mb-0 mb-3">
-      <Image
-        src={avatar || 'placeholder'}
+      <img
+        src={avatar}
         alt={full_name + ' avatar'}
         width={112}
         height={112}

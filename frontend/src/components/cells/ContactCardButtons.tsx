@@ -26,7 +26,7 @@ const ContactCardButtons = ({
     if (confirm('Do you really want to delete this contact?')) {
       try {
         const response = await axios.delete(
-          `http://localhost:8000/api/delete_contact/${contactId}/`,
+          `https://leste-telecom-rrwtejtbla-rj.a.run.app/api/delete_contact/${contactId}/`,
           {
             headers: {
               'X-CSRFToken': csrfToken,

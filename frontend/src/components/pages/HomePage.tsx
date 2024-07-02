@@ -29,7 +29,7 @@ const HomePage = ({ list }: { list: iContactItem[] }) => {
   const { contacts, setContacts, setInitialContacts }: any = useContact();
 
   async function api(searchContext: iSearchContext) {
-    let url = 'http://localhost:8000/api/contacts';
+    let url = 'https://leste-telecom-rrwtejtbla-rj.a.run.app/api/contacts';
     const { slug, gender, language, birthMonth } = searchContext;
     if (slug || gender || language || birthMonth) {
       try {
@@ -52,6 +52,18 @@ const HomePage = ({ list }: { list: iContactItem[] }) => {
   useEffect(() => {
     api(searchContext);
   }, [searchContext]);
+
+  useEffect(() => {
+    //console.clear();
+    console.log('Made by:');
+    console.log(
+      '%c▷%c▷%c▷%c www.sandrofilho.dev',
+      'font-size: 24px;',
+      'color:#FC5214;font-size: 24px; margin-left: -13px;',
+      'color:initial;font-size: 24px; margin-left: -13px;',
+      'font-size: 16px;'
+    );
+  }, []);
 
   return (
     <>
