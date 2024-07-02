@@ -321,7 +321,7 @@ backend/.dmypy.json
 django_project/.dmypy.json
 backend/dmypy.json
 django_project/dmypy.json
-
+backend/credentials
 # Pyre type checker
 backend/.pyre/
 django_project/.pyre/
