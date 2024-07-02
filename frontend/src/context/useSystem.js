@@ -12,6 +12,7 @@ export const SystemContextProvider = ({ children }) => {
     useState(false);
   const [searchSkeletonOverlayActive, setSearchSkeletonOverlayActive] =
     useState(false);
+  const [currContactEdit, setCurrContactEdit] = useState(false);
 
   return (
     <systemContext.Provider
@@ -24,6 +25,8 @@ export const SystemContextProvider = ({ children }) => {
         setIsFilterActive,
         isContactFormOverlayActive,
         setIContactFormOverlayActive,
+        currContactEdit,
+        setCurrContactEdit,
       }}
     >
       {children}

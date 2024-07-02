@@ -47,6 +47,35 @@ class CreateContactView(View):
             return JsonResponse({"error": str(e)}, status=500)
 
 
+@method_decorator(csrf_exempt, name="dispatch")
+class UpdateContactView(View):
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        try:
+            data = json.loads(request.body)
+            contact_id = kwargs.get("id")
+
+            try:
+                contact = Contact.objects.get(id=contact_id)
+            except Contact.DoesNotExist:
+                return JsonResponse({"error": "Contact not found"}, status=404)
+
+            contact.first_name = data.get("first_name", contact.first_name)
+            contact.last_name = data.get("last_name", contact.last_name)
+            contact.email = data.get("email", contact.email)
+            contact.birthdate = data.get("birthdate", contact.birthdate)
+            contact.gender = data.get("gender", contact.gender)
+            contact.language = data.get("language", contact.language)
+            contact.save()
+
+            return JsonResponse({"message": "Contact updated successfully"})
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Invalid JSON"}, status=400)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+
+
 class ContactDetailView(generics.GenericAPIView):
     serializer_class = ContactSerializer
     queryset = Contact.objects.all()

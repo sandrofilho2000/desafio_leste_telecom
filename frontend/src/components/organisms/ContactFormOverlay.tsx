@@ -1,5 +1,5 @@
 import React from 'react';
-import ContactForm from './ContactForm';
+import ContactForm from '../cells/ContactForm';
 import { useSystem } from '@context/useSystem';
 
 const ContactFormOverlay = () => {

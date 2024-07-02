@@ -3,7 +3,7 @@ import Button from '@components/atoms/Button';
 import { useSystem } from '@context/useSystem';
 import axios from 'axios';
 import Image from 'next/image';
-import React, { FormEvent, useRef, useState } from 'react';
+import React, { FormEvent, useEffect, useRef, useState } from 'react';
 import { BsCalendar2Month } from 'react-icons/bs';
 import { FaRegUser, FaSave } from 'react-icons/fa';
 import { ImManWoman } from 'react-icons/im';
@@ -17,10 +17,14 @@ const ContactForm = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const avatar = useRef<HTMLImageElement>(null);
   const [imageSrc, setImageSrc] = useState<string>(defaultPic.src);
-  const { isContactFormOverlayActive, setIContactFormOverlayActive }: any =
-    useSystem();
+  const {
+    isContactFormOverlayActive,
+    setIContactFormOverlayActive,
+    currContactEdit,
+    setCurrContactEdit,
+  }: any = useSystem();
 
-  const handleAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAvatarImg = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -31,7 +35,7 @@ const ContactForm = () => {
     }
   };
 
-  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmitAdd = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (formRef.current) {
       const newContact = {
@@ -42,7 +46,6 @@ const ContactForm = () => {
         gender: formRef.current.gender.value,
         language: formRef.current.language.value,
       };
-      console.log('🚀 ~ file: ContactForm.tsx:46 ~ newContact:', newContact);
 
       const csrfToken = Cookies.get('csrftoken');
 
@@ -56,21 +59,96 @@ const ContactForm = () => {
             },
           }
         );
-        console.log(response.data); // Log success message from Django
-        // Optionally, handle success feedback or redirection
+        alert('Contact added successfully!');
       } catch (error) {
         console.error('Error saving contact:', error);
-        // Handle error feedback if needed
       }
     }
   };
+
+  const handleFormSubmitUpdate = async (
+    e: FormEvent<HTMLFormElement>,
+    contactId: string
+  ) => {
+    e.preventDefault();
+    if (formRef.current) {
+      const updatedContact = {
+        first_name: formRef.current.first_name.value,
+        last_name: formRef.current.last_name.value,
+        email: formRef.current.email.value,
+        birthdate: formRef.current.birthdate.value,
+        gender: formRef.current.gender.value,
+        language: formRef.current.language.value,
+      };
+
+      const csrfToken = Cookies.get('csrftoken');
+
+      try {
+        const response = await axios.post(
+          `http://localhost:8000/api/update_contact/${contactId}/`,
+          updatedContact,
+          {
+            headers: {
+              'X-CSRFToken': csrfToken,
+            },
+          }
+        );
+        alert('Contact updated successfully!');
+        window.location.reload();
+      } catch (error) {
+        console.error('Error updating contact:', error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (currContactEdit.id) {
+      console.log(
+        '🚀 ~ file: ContactForm.tsx:71 ~ currContactEdit:',
+        currContactEdit
+      );
+      setIContactFormOverlayActive(true);
+      const {
+        first_name,
+        last_name,
+        email,
+        birthdate,
+        gender,
+        language,
+        avatar,
+      } = currContactEdit;
+      if (formRef.current) {
+        formRef.current.first_name.value = first_name;
+        formRef.current.last_name.value = last_name;
+        formRef.current.email.value = email;
+        formRef.current.birthdate.value = birthdate;
+        formRef.current.gender.value = gender;
+        formRef.current.language.value = language;
+        setImageSrc(avatar);
+      }
+    }
+  }, [currContactEdit]);
+
+  useEffect(() => {
+    if (!isContactFormOverlayActive) {
+      setCurrContactEdit(false);
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+      setImageSrc(defaultPic.src);
+    }
+  }, [isContactFormOverlayActive]);
 
   return (
     <form
       ref={formRef}
       className="contactForm "
       onSubmit={(e) => {
-        handleFormSubmit(e);
+        if (currContactEdit.id) {
+          handleFormSubmitUpdate(e, currContactEdit.id);
+        } else {
+          handleFormSubmitAdd(e);
+        }
       }}
     >
       <IoMdClose
@@ -87,11 +165,10 @@ const ContactForm = () => {
           </div>
           <input
             type="file"
-            required={true}
             name="avatar"
             id="avatar"
             className="sr-only"
-            onChange={handleAvatar}
+            onChange={handleAvatarImg}
           />
           <Image
             alt="Contact avatar"

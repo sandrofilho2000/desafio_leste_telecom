@@ -48,7 +48,10 @@ const ContactCard = ({
         language={language}
       />
 
-      <ContactCardButtons layoutMode={layoutMode} />
+      <ContactCardButtons
+        contact={contact}
+        layoutMode={layoutMode}
+      />
     </div>
   );
 };
