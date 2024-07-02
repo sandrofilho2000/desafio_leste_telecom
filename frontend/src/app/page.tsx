@@ -1,10 +1,12 @@
 import { iContactItem } from '../interfaces';
 import axios from 'axios';
-import HomePage from '@components/HomePage';
+import HomePage from '@components/pages/HomePage';
+import Cookies from 'js-cookie';
 
 async function api(path: string) {
-  let url = `${process.env.API_URL}/${path}`;
+  const url = `${process.env.API_URL}/${path}`;
   console.log('🚀 ~ file: page.tsx:11 ~ url:', url);
+
   try {
     const res = await axios.get(url, {
       headers: {
@@ -13,13 +15,13 @@ async function api(path: string) {
     });
     return res.data;
   } catch (error) {
-    // Trate erros aqui, se necessário
     console.error('Erro na requisição:', error);
-    throw error; // Pode ser útil para tratar o erro no chamador da função
+    throw error; // Throw the error to handle it in the caller function
   }
 }
 
 export default async function Home() {
   const { contacts }: { contacts: iContactItem[] } = await api('contacts');
+
   return <HomePage list={contacts} />;
 }

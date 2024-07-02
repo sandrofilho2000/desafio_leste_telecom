@@ -8,6 +8,8 @@ export const useSystem = () => useContext(systemContext);
 export const SystemContextProvider = ({ children }) => {
   const [searchContext, setSearchContext] = useState({});
   const [isFilterActive, setIsFilterActive] = useState(false);
+  const [isContactFormOverlayActive, setIContactFormOverlayActive] =
+    useState(false);
   const [searchSkeletonOverlayActive, setSearchSkeletonOverlayActive] =
     useState(false);
 
@@ -20,6 +22,8 @@ export const SystemContextProvider = ({ children }) => {
         setSearchSkeletonOverlayActive,
         isFilterActive,
         setIsFilterActive,
+        isContactFormOverlayActive,
+        setIContactFormOverlayActive,
       }}
     >
       {children}

@@ -5,7 +5,46 @@ from rest_framework.exceptions import NotFound
 from rest_framework.permissions import AllowAny
 from contacts.models import Contact
 from contacts.serializers import ContactSerializer
+from django.views import View
 import calendar
+import json
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.http import JsonResponse
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+
+
+@method_decorator(ensure_csrf_cookie, name="dispatch")
+class CSRFTokenView(View):
+    def get(self, request, *args, **kwargs):
+        return JsonResponse({"detail": "CSRF cookie set"})
+
+
+@method_decorator(csrf_exempt, name="dispatch")
+class CreateContactView(View):
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        try:
+            data = json.loads(request.body)
+
+            new_contact = Contact(
+                first_name=data.get("first_name"),
+                last_name=data.get("last_name"),
+                email=data.get("email"),
+                birthdate=data.get("birthdate"),
+                gender=data.get("gender"),
+                language=data.get("language"),
+            )
+            new_contact.save()
+
+            print("new_contact: ", data)
+
+            return JsonResponse({"message": "Contact saved successfully"})
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Invalid JSON"}, status=400)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
 
 
 class ContactDetailView(generics.GenericAPIView):

@@ -21,7 +21,8 @@
       "@components/*": ["./src/components/*"],
       "@context/*": ["./src/context/*"],
       "@interfaces/*": ["./src/interfaces/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@utils/*": ["./src/utils/*"],
+      "@public/*": ["./public/*"]
     }
   },
   "include": [
@@ -29,7 +30,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/context/useSystem.js"
+    "src/context/useSystem.js",
+    "src/app/pages/add_contact"
   ],
   "exclude": ["node_modules"]
 }

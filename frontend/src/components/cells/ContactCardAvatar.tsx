@@ -17,7 +17,7 @@ const ContactCardAvatar = ({
         alt={full_name + ' avatar'}
         width={112}
         height={112}
-        className={'object-cover rounded-xl'}
+        className={'object-cover rounded-xl bg-white'}
       />
       {gender == 'male' && (
         <div className="gender absolute bottom-0 right-0 translate-x-[20%] translate-y-[20%] text-xl rounded-full bg-[#0ba5fe] text-white p-1">
