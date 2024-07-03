@@ -2,6 +2,7 @@ asgiref==3.8.1
 cachetools==5.3.3
 certifi==2024.6.2
 charset-normalizer==3.3.2
+dj-database-url==2.2.0
 Django==5.0.6
 django-colorfield==0.11.0
 django-cors-headers==4.3.1
@@ -22,12 +23,14 @@ packaging==24.0
 pillow==10.3.0
 proto-plus==1.23.0
 protobuf==4.25.3
+psycopg2-binary==2.9.9
 pyasn1==0.6.0
 pyasn1_modules==0.4.0
 python-dotenv==1.0.1
 requests==2.32.3
 rsa==4.9
 sqlparse==0.5.0
+typing_extensions==4.12.2
 tzdata==2024.1
 urllib3==2.2.1
 whitenoise==6.6.0
