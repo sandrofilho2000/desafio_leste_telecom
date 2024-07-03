@@ -16,6 +16,7 @@ async function api(path: string) {
 
 export default async function Home() {
   const { contacts }: { contacts: iContactItem[] } = await api('contacts');
+  console.log('🚀 ~ file: page.tsx:19 ~ contacts:', contacts);
 
   return <HomePage list={contacts} />;
 }
