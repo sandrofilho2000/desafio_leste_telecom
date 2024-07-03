@@ -51,8 +51,8 @@ const ContactForm = () => {
 
       const csrfToken = Cookies.get('csrftoken');
       const url = currContactEdit.id
-        ? `https://leste-telecom-rrwtejtbla-rj.a.run.app/api/update_contact/${currContactEdit.id}/`
-        : 'https://leste-telecom-rrwtejtbla-rj.a.run.app/api/create_contact/';
+        ? `http://localhost:8000/api/update_contact/${currContactEdit.id}/`
+        : 'http://localhost:8000/api/create_contact/';
 
       try {
         const response = await axios.post(url, formData, {

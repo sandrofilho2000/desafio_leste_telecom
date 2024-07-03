@@ -14,14 +14,14 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/create_contact/", CreateContactView.as_view(), name="create_contact"),
     path("api/csrf_token/", CSRFTokenView.as_view(), name="csrf_token"),
-    path("api/contacts", ContactDetailView.as_view(), name="site_data"),
+    path("api/contacts", ContactDetailView.as_view(), name="contact_detail"),
     path(
-        "api/update_contact/<uuid:id>/",
+        "api/update_contact/<uuid:contact_id>/",
         UpdateContactView.as_view(),
         name="update_contact",
     ),
     path(
-        "api/delete_contact/<uuid:id>/",
+        "api/delete_contact/<uuid:contact_id>/",
         DeleteContactView.as_view(),
         name="delete_contact",
     ),

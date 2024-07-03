@@ -77,9 +77,9 @@ class UpdateContactView(View):
 class DeleteContactView(View):
     permission_classes = [AllowAny]
 
-    def delete(self, request, id, *args, **kwargs):
+    def delete(self, request, contact_id, *args, **kwargs):
         try:
-            contact = Contact.objects.get(id=id)
+            contact = Contact.objects.get(id=contact_id)
             contact.delete()
             return JsonResponse({"message": "Contact deleted successfully"})
         except Contact.DoesNotExist:
@@ -111,7 +111,6 @@ class ContactDetailView(generics.GenericAPIView):
                 print("Error")
                 pass
 
-        print("SLUG: ", slug)
         if slug:
             queryset = queryset.filter(slug__icontains=slug)
         if gender:
