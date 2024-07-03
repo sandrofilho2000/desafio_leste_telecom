@@ -1,12 +1,12 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import dj_database_url
 
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -18,8 +18,7 @@ if DEBUG in ["true", "1", True, "True"]:
     DEBUG = True
 else:
     DEBUG = False
-    
-    
+
 # Get allowed hosts from environment variables
 allowed_hosts_str = os.environ.get("ALLOWED_HOSTS")
 ALLOWED_HOSTS = allowed_hosts_str.split(",")
@@ -27,15 +26,6 @@ ALLOWED_HOSTS = allowed_hosts_str.split(",")
 # Get CSRF trusted origins from environment variables
 csrf_trusted_origins_str = os.environ.get("CSRF_TRUSTED_ORIGINS")
 CSRF_TRUSTED_ORIGINS = csrf_trusted_origins_str.split(",")
-
-
-allowed_hosts_str = os.environ.get("ALLOWED_HOSTS")
-ALLOWED_HOSTS = allowed_hosts_str.split(",")
-
-# Get CSRF trusted origins from environment variables
-csrf_trusted_origins_str = os.environ.get("CSRF_TRUSTED_ORIGINS")
-CSRF_TRUSTED_ORIGINS = csrf_trusted_origins_str.split(",")
-
 
 # Application definition
 
@@ -60,7 +50,6 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ],
 }
-
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -93,17 +82,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "api.wsgi.app"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    "default": dj_database_url.config(
+        default=os.environ.get("DATABASE_URL"), conn_max_age=600, ssl_require=True
+    )
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -123,7 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
@@ -136,7 +121,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOWS_CREDENTIALS = True
+CORS_ALLOW_CREDENTIALS = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -144,7 +129,6 @@ CORS_ALLOWS_CREDENTIALS = True
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "static/"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
 
 from google.oauth2 import service_account
 
@@ -162,4 +146,4 @@ GS_BUCKET_NAME = os.environ.get("GS_BUCKET_NAME")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_ROOT = "media/"
 UPLOAD_ROOT = "media/uploads/"
-MEDIA_URL = f"{os.environ.get("MEDIA_URL")}{GS_BUCKET_NAME}/"
+MEDIA_URL = f"{os.environ.get('MEDIA_URL')}/{GS_BUCKET_NAME}/"

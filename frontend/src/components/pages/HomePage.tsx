@@ -13,11 +13,10 @@ import NotFound from '../organisms/NotFound';
 import Filters from '../organisms/Filters';
 import Button from '../atoms/Button';
 import { IoMdPersonAdd } from 'react-icons/io';
-import Link from 'next/link';
 import ContactFormOverlay from '@components/organisms/ContactFormOverlay';
 
 const HomePage = ({ list }: { list: iContactItem[] }) => {
-  const [layoutMode, setLayoutMode] = useState('grid');
+  const [layoutMode, setLayoutMode] = useState('list');
   const [firstLoad, setFirstLoad] = useState(true);
   const {
     searchContext,
@@ -26,10 +25,11 @@ const HomePage = ({ list }: { list: iContactItem[] }) => {
     isContactFormOverlayActive,
     setIContactFormOverlayActive,
   }: any = useSystem();
-  const { contacts, setContacts, setInitialContacts }: any = useContact();
+  const { contacts, setContacts, initialContacts, setInitialContacts }: any =
+    useContact();
 
   async function api(searchContext: iSearchContext) {
-    let url = 'https://leste-telecom-rrwtejtbla-rj.a.run.app/api/contacts';
+    let url = 'http://127.0.0.1:8000/api/contacts';
     const { slug, gender, language, birthMonth } = searchContext;
     if (slug || gender || language || birthMonth) {
       try {
@@ -41,6 +41,8 @@ const HomePage = ({ list }: { list: iContactItem[] }) => {
         console.log('Error na requisição:', error);
         throw error;
       }
+    } else if (!slug && !gender && !language && !birthMonth && !firstLoad) {
+      setContacts(initialContacts);
     }
   }
 

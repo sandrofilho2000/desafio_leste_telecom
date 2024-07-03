@@ -51,7 +51,7 @@ const ContactForm = () => {
 
       try {
         const response = await axios.post(
-          'https://leste-telecom-rrwtejtbla-rj.a.run.app/api/create_contact/',
+          'http://localhost:8000/api/create_contact/',
           newContact,
           {
             headers: {
@@ -85,7 +85,7 @@ const ContactForm = () => {
 
       try {
         const response = await axios.post(
-          `https://leste-telecom-rrwtejtbla-rj.a.run.app/api/update_contact/${contactId}/`,
+          `http://localhost:8000/api/update_contact/${contactId}/`,
           updatedContact,
           {
             headers: {

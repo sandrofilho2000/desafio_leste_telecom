@@ -111,8 +111,10 @@ class ContactDetailView(generics.GenericAPIView):
                     birth_month.capitalize()
                 )
             except ValueError:
+                print("Error")
                 pass
 
+        print("SLUG: ", slug)
         if slug:
             queryset = queryset.filter(slug__icontains=slug)
         if gender:

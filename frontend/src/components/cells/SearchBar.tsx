@@ -27,13 +27,12 @@ const SearchBar = () => {
     <div className="flex items-center max-w-[200px] md:max-w-md bg-[#e8ebea] rounded-lg">
       <div className="w-full">
         <input
-          type="Search..."
+          type="search"
           onChange={(e) => {
             handleSkeletonOverlay(e.target.value);
           }}
           className="w-full px-2 py-0.5 md:px-4 md:py-1 text-gray-800 rounded-full focus:outline-none bg-transparent"
-          placeholder="search"
-          x-model="search"
+          placeholder="Search..."
         />
       </div>
       <div>

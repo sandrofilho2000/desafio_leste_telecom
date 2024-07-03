@@ -27,9 +27,10 @@ class ContactAdmin(admin.ModelAdmin):
 
         return format_html(
             """<div style="display: flex; align-items: center; gap: 4px">
-                <img style='width: 50px; height: 50px; border-radius: 50%;object-fit: cover; background-color: white; border: 2px solid #417690' src='{}{}'/>
+                <img style='width: 50px; height: 50px; border-radius: 50%;object-fit: cover; background-color: white; border: 2px solid #417690' src='{}/{}/{}'/>
             </div>""",
             os.environ.get("MEDIA_URL"),
+            os.environ.get("GS_BUCKET_NAME"),
             str(obj.avatar),
         )
 

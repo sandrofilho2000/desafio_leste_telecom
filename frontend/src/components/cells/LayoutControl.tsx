@@ -14,16 +14,6 @@ const LayoutControl = ({
     <div className="layout_btns text-3xl flex cursor-pointer gap-1">
       <div
         onClick={() => {
-          setLayoutMode('grid');
-        }}
-        className={`${
-          layoutMode == 'grid' && 'bg-white shadow'
-        } rounded-md transition-all grid place-content-center p-1`}
-      >
-        <CiGrid41 />
-      </div>
-      <div
-        onClick={() => {
           setLayoutMode('list');
         }}
         className={`${
@@ -31,6 +21,16 @@ const LayoutControl = ({
         } rounded-md transition-all grid place-content-center p-1`}
       >
         <CiBoxList />
+      </div>
+      <div
+        onClick={() => {
+          setLayoutMode('grid');
+        }}
+        className={`${
+          layoutMode == 'grid' && 'bg-white shadow'
+        } rounded-md transition-all grid place-content-center p-1`}
+      >
+        <CiGrid41 />
       </div>
     </div>
   );
