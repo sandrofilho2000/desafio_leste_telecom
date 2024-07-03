@@ -19,7 +19,7 @@ export const ContactContextProvider = ({ children }) => {
   } = useSystem();
 
   async function api(searchContext = null) {
-    const url = 'http://localhost:8000/api/contacts';
+    const url = 'https://leste-telecom-rrwtejtbla-rj.a.run.app/api/contacts';
 
     try {
       if (searchContext) {
