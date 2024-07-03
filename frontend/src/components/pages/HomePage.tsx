@@ -15,7 +15,7 @@ import Button from '../atoms/Button';
 import { IoMdPersonAdd } from 'react-icons/io';
 import ContactFormOverlay from '@components/organisms/ContactFormOverlay';
 
-const HomePage = ({ list }: { list: iContactItem[] }) => {
+const HomePage = () => {
   const [layoutMode, setLayoutMode] = useState('list');
   const [firstLoad, setFirstLoad] = useState(true);
   const {
@@ -27,33 +27,6 @@ const HomePage = ({ list }: { list: iContactItem[] }) => {
   }: any = useSystem();
   const { contacts, setContacts, initialContacts, setInitialContacts }: any =
     useContact();
-
-  async function api(searchContext: iSearchContext) {
-    let url = 'http://127.0.0.1:8000/api/contacts';
-    const { slug, gender, language, birthMonth } = searchContext;
-    if (slug || gender || language || birthMonth) {
-      try {
-        const { data } = await axios.get(url, { params: searchContext });
-        const { contacts: filteredContacts } = data;
-        setContacts(filteredContacts);
-        setFirstLoad(false);
-      } catch (error) {
-        console.log('Error na requisição:', error);
-        throw error;
-      }
-    } else if (!slug && !gender && !language && !birthMonth && !firstLoad) {
-      setContacts(initialContacts);
-    }
-  }
-
-  useEffect(() => {
-    setContacts(list);
-    setInitialContacts(list);
-  }, []);
-
-  useEffect(() => {
-    api(searchContext);
-  }, [searchContext]);
 
   useEffect(() => {
     //console.clear();
