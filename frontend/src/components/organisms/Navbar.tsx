@@ -10,8 +10,8 @@ const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-white border border-gray-200 sm:px-4 px-8 md:px-16 lg:px-24 py-2.5 rounded relative z-30">
-      <div className="flex flex-wrap justify-between items-center">
+    <nav className="bg-white border border-gray-200  px-4 md:px-16 lg:px-24 py-2.5 rounded relative z-30">
+      <div className="flex justify-between items-center">
         <Link
           href="/"
           className="flex items-center p-2"
@@ -20,6 +20,7 @@ const Navbar = () => {
             src={logo}
             height={48}
             width={135}
+            className="h-9 w-28 md:h-12 md:w-32"
             alt="logo"
             title="logo"
           />

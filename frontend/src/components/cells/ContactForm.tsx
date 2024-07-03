@@ -174,7 +174,7 @@ const ContactForm = () => {
             alt="Contact avatar"
             title="Contact Avatar"
             ref={avatar}
-            className="bg-white rounded-lg shadow-md hover:shadow-lg min-h-40 min-w-40 object-cover"
+            className="bg-white w-32 h-32 md:w-40 md:h-40 rounded-lg shadow-md hover:shadow-lg min-h-40 min-w-40 object-cover"
             height={160}
             width={160}
             src={imageSrc}

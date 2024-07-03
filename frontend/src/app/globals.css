@@ -15,7 +15,7 @@
   }
 
   .contactsWrapper.gridLayout {
-    @apply grid grid-cols-custom gap-10 ml-[-13px];
+    @apply grid grid-cols-custom gap-10 ml-[-13px] max-[630px]:justify-center;
   }
 
   .contactsWrapper.listLayout {
@@ -27,7 +27,7 @@
   }
 
   .contactCard.listLayout {
-    @apply w-full rounded-b-[0px] [&>.contactCardAvatar>img]:w-[100px] [&>.contactCardAvatar>img]:h-[100px] pb-[60px] [&>.contactCardInfo]:absolute [&>.contactCardInfo]:left-[120px] [&>.contactCardInfo]:transform  [&>.contactCardButtons]:absolute [&>.contactCardButtons]:bottom-3 [&>.contactCardButtons]:left-0;
+    @apply w-full rounded-b-[0px] [&>.contactCardAvatar>img]:w-[100px] [&>.contactCardAvatar>img]:h-[100px] pb-[45px] md:pb-[60px] [&>.contactCardInfo]:absolute [&>.contactCardInfo]:left-[120px] [&>.contactCardInfo]:transform  [&>.contactCardButtons]:absolute [&>.contactCardButtons]:bottom-3 [&>.contactCardButtons]:left-0;
   }
 
   .addContactCard {
@@ -51,16 +51,16 @@
   }
 
   .contactForm .inputWrapper {
-    @apply flex items-center gap-2;
+    @apply flex items-center gap-1 md:gap-2;
   }
 
   .contactForm .inputWrapper svg {
-    @apply text-xl;
+    @apply text-base md:text-xl;
   }
 
   .contactForm .inputWrapper input,
   .contactForm .inputWrapper select {
-    @apply rounded-md px-2 py-2 w-[199px] text-sm;
+    @apply rounded-sm px-1 py-1 w-[120px] text-xs md:rounded-md md:px-2 md:py-2 md:w-[199px] md:text-sm;
   }
 }
 
