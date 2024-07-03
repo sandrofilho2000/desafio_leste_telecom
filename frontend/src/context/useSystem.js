@@ -13,10 +13,12 @@ export const SystemContextProvider = ({ children }) => {
   const [searchSkeletonOverlayActive, setSearchSkeletonOverlayActive] =
     useState(false);
   const [currContactEdit, setCurrContactEdit] = useState(false);
-
+  const [firstLoad, setFirstLoad] = useState(true);
   return (
     <systemContext.Provider
       value={{
+        firstLoad,
+        setFirstLoad,
         searchContext,
         setSearchContext,
         searchSkeletonOverlayActive,

@@ -1,28 +1,27 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import Navbar from '../organisms/Navbar';
-import { iContactItem, iSearchContext } from '../../interfaces';
-import ContactCard from '../organisms/ContactCard';
-import LayoutControl from '../cells/LayoutControl';
+import Navbar from '@components/organisms/Navbar';
+import { iContactItem, iSearchContext } from '@interfaces/index';
+import ContactCard from '@components/organisms/ContactCard';
+import LayoutControl from '@components/cells/LayoutControl';
 import { useSystem } from '@context/useSystem';
-import SkeletonCard from '../cells/SkeletonCard';
+import SkeletonCard from '@components/cells/SkeletonCard';
 import { useContact } from '@context/useContact';
 import { slugify } from '@utils/slugify';
 import axios from 'axios';
-import NotFound from '../organisms/NotFound';
-import Filters from '../organisms/Filters';
-import Button from '../atoms/Button';
+import NotFound from '@components/organisms/NotFound';
+import Filters from '@components/organisms/Filters';
+import Button from '@components/atoms/Button';
 import { IoMdPersonAdd } from 'react-icons/io';
 import ContactFormOverlay from '@components/organisms/ContactFormOverlay';
 
 const HomePage = () => {
   const [layoutMode, setLayoutMode] = useState('list');
-  const [firstLoad, setFirstLoad] = useState(true);
   const {
+    firstLoad,
+    setFirstLoad,
     searchContext,
-    setSearchContext,
     searchSkeletonOverlayActive,
-    isContactFormOverlayActive,
     setIContactFormOverlayActive,
   }: any = useSystem();
   const { contacts, setContacts, initialContacts, setInitialContacts }: any =

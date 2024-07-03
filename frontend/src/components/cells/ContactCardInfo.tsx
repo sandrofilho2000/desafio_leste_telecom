@@ -11,17 +11,29 @@ const ContactCardInfo = ({
   birthdate,
   language,
 }: iContactCardInfo) => {
+  const enshortString = (string: string, maxlength: number) => {
+    let new_string = string;
+
+    if (new_string.length > maxlength) {
+      new_string = string.slice(0, maxlength) + '...';
+    }
+    return new_string;
+  };
+
   return (
     <div className="contactCardInfo flex flex-col items-start gap-1">
       <h2 className="w-full flex-none text-lg text-[#009373] font-bold leading-none">
         {full_name} ({age})
       </h2>
 
-      <div className="cardInfo flex items-center gap-1 text-gray-500 text-sm">
+      <div
+        className="cardInfo flex items-center gap-1 text-gray-500 text-sm"
+        title={email}
+      >
         <span>
           <MdOutlineEmail className="text-base" />
         </span>
-        <span>{email}</span>
+        <span>{enshortString(email, 22)}</span>
       </div>
 
       <div className="cardInfo flex items-center gap-1 text-gray-500 text-sm">

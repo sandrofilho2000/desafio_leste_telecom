@@ -1,7 +1,5 @@
-import { useContact } from '@context/useContact';
 import { useSystem } from '@context/useSystem';
-import React, { useEffect, useRef, useState } from 'react';
-import { CiFilter } from 'react-icons/ci';
+import React from 'react';
 import { FaFilter } from 'react-icons/fa';
 
 const SearchBar = () => {
@@ -20,7 +18,7 @@ const SearchBar = () => {
     typingTimer = setTimeout(() => {
       setSearchContext({ ...searchContext, slug: slug });
       setSearchSkeletonOverlayActive(false);
-    }, 1300);
+    }, 2000);
   };
 
   return (

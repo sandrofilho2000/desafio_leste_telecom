@@ -1,5 +1,4 @@
 'use client';
-import Button from '@components/atoms/Button';
 import { useSystem } from '@context/useSystem';
 import axios from 'axios';
 import Image from 'next/image';
@@ -8,7 +7,7 @@ import { BsCalendar2Month } from 'react-icons/bs';
 import { FaRegUser, FaSave } from 'react-icons/fa';
 import { ImManWoman } from 'react-icons/im';
 import { IoMdClose } from 'react-icons/io';
-import { IoLanguage, IoSaveOutline } from 'react-icons/io5';
+import { IoLanguage } from 'react-icons/io5';
 import { MdOutlineEmail } from 'react-icons/md';
 import Cookies from 'js-cookie';
 import defaultPic from '@public/assets/default_user.webp';
@@ -60,6 +59,7 @@ const ContactForm = () => {
           }
         );
         alert('Contact added successfully!');
+        window.location.reload();
       } catch (error) {
         console.error('Error saving contact:', error);
       }
