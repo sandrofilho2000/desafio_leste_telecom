@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { IoMdFemale } from 'react-icons/io';
 import { MdMale } from 'react-icons/md';
 import { iContactCardAvatar } from '@interfaces/index';

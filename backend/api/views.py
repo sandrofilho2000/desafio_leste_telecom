@@ -26,40 +26,35 @@ class CreateContactView(View):
 
     def post(self, request, *args, **kwargs):
         try:
-            data = json.loads(request.body)
+            data = request.POST.dict()
+            avatar_file = request.FILES.get("avatar")
 
             new_contact = Contact(
-                first_name=data.get("first_name"),
-                last_name=data.get("last_name"),
-                email=data.get("email"),
-                birthdate=data.get("birthdate"),
-                gender=data.get("gender"),
-                language=data.get("language"),
+                first_name=data["first_name"],
+                last_name=data["last_name"],
+                email=data["email"],
+                birthdate=data["birthdate"],
+                gender=data["gender"],
+                language=data["language"],
             )
+            if avatar_file:
+                new_contact.avatar.save(avatar_file.name, avatar_file)
+
             new_contact.save()
-
-            print("new_contact: ", data)
-
-            return JsonResponse({"message": "Contact saved successfully"})
-        except json.JSONDecodeError:
-            return JsonResponse({"error": "Invalid JSON"}, status=400)
+            return JsonResponse({"message": "Contact created successfully"})
         except Exception as e:
-            return JsonResponse({"error": str(e)}, status=500)
+            return JsonResponse({"error": str(e)}, status=400)
 
 
 @method_decorator(csrf_exempt, name="dispatch")
 class UpdateContactView(View):
     permission_classes = [AllowAny]
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, contact_id, *args, **kwargs):
         try:
-            data = json.loads(request.body)
-            contact_id = kwargs.get("id")
-
-            try:
-                contact = Contact.objects.get(id=contact_id)
-            except Contact.DoesNotExist:
-                return JsonResponse({"error": "Contact not found"}, status=404)
+            contact = Contact.objects.get(id=contact_id)
+            data = request.POST.dict()
+            avatar_file = request.FILES.get("avatar")
 
             contact.first_name = data.get("first_name", contact.first_name)
             contact.last_name = data.get("last_name", contact.last_name)
@@ -67,13 +62,15 @@ class UpdateContactView(View):
             contact.birthdate = data.get("birthdate", contact.birthdate)
             contact.gender = data.get("gender", contact.gender)
             contact.language = data.get("language", contact.language)
-            contact.save()
+            if avatar_file:
+                contact.avatar.save(avatar_file.name, avatar_file)
 
+            contact.save()
             return JsonResponse({"message": "Contact updated successfully"})
-        except json.JSONDecodeError:
-            return JsonResponse({"error": "Invalid JSON"}, status=400)
+        except Contact.DoesNotExist:
+            return JsonResponse({"error": "Contact not found"}, status=404)
         except Exception as e:
-            return JsonResponse({"error": str(e)}, status=500)
+            return JsonResponse({"error": str(e)}, status=400)
 
 
 @method_decorator(csrf_exempt, name="dispatch")

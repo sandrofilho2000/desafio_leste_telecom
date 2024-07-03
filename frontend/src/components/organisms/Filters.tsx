@@ -21,16 +21,13 @@ const Filters = () => {
 
   const formRef = useRef<HTMLFormElement>(null);
   var typingTimer: any;
-  let handleSkeletonOverlay = () => {
+  let handleSearch = () => {
     clearTimeout(typingTimer);
-    setSearchSkeletonOverlayActive(true);
-    typingTimer = setTimeout(() => {
-      setSearchSkeletonOverlayActive(false);
-    }, 1300);
+    typingTimer = setTimeout(() => {}, 2000);
 
     let context = {
       slug: searchContext.slug,
-      gender: '',
+      gender: searchContext.gender,
       language: searchContext.language,
       birthMonth: searchContext.birthMonth,
     };
@@ -44,11 +41,11 @@ const Filters = () => {
       let birthMonth = formRef.current.birthMonth.value;
       context.birthMonth = birthMonth;
 
-      if (!gender && !language && !birthMonth) {
+      /* if (!gender && !language && !birthMonth) {
         setContacts(initialContacts);
-      } else {
-        setSearchContext(context);
-      }
+      } */
+
+      setSearchContext(context);
     }
   };
 
@@ -88,7 +85,7 @@ const Filters = () => {
         className="flex flex-col lg:flex-row w-full gap-2 lg:gap-4 relative justify-center lg:justify-start"
         ref={formRef}
         onChange={() => {
-          handleSkeletonOverlay();
+          handleSearch();
         }}
       >
         <div className="genderSelect flex items-center gap-1 text-[#00997B]">
@@ -148,6 +145,7 @@ const Filters = () => {
           type="reset"
           onClick={() => {
             setContacts(initialContacts);
+            setSearchContext({});
           }}
         >
           RESET FORM

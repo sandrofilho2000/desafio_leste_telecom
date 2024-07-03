@@ -14,7 +14,7 @@ import defaultPic from '@public/assets/default_user.webp';
 
 const ContactForm = () => {
   const formRef = useRef<HTMLFormElement>(null);
-  const avatar = useRef<HTMLImageElement>(null);
+  const avatarInputRef = useRef<HTMLInputElement>(null);
   const [imageSrc, setImageSrc] = useState<string>(defaultPic.src);
   const {
     isContactFormOverlayActive,
@@ -34,31 +34,34 @@ const ContactForm = () => {
     }
   };
 
-  const handleFormSubmitAdd = async (e: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (formRef.current) {
-      const newContact = {
-        first_name: formRef.current.first_name.value,
-        last_name: formRef.current.last_name.value,
-        email: formRef.current.email.value,
-        birthdate: formRef.current.birthdate.value,
-        gender: formRef.current.gender.value,
-        language: formRef.current.language.value,
-      };
+      const formData = new FormData();
+      formData.append('first_name', formRef.current.first_name.value);
+      formData.append('last_name', formRef.current.last_name.value);
+      formData.append('email', formRef.current.email.value);
+      formData.append('birthdate', formRef.current.birthdate.value);
+      formData.append('gender', formRef.current.gender.value);
+      formData.append('language', formRef.current.language.value);
+
+      if (avatarInputRef.current?.files?.[0]) {
+        formData.append('avatar', avatarInputRef.current.files[0]);
+      }
 
       const csrfToken = Cookies.get('csrftoken');
+      const url = currContactEdit.id
+        ? `http://localhost:8000/api/update_contact/${currContactEdit.id}/`
+        : 'http://localhost:8000/api/create_contact/';
 
       try {
-        const response = await axios.post(
-          'https://leste-telecom-rrwtejtbla-rj.a.run.app/api/create_contact/',
-          newContact,
-          {
-            headers: {
-              'X-CSRFToken': csrfToken,
-            },
-          }
-        );
-        alert('Contact added successfully!');
+        const response = await axios.post(url, formData, {
+          headers: {
+            'X-CSRFToken': csrfToken,
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        alert('Contact saved successfully!');
         window.location.reload();
       } catch (error) {
         console.error('Error saving contact:', error);
@@ -66,47 +69,8 @@ const ContactForm = () => {
     }
   };
 
-  const handleFormSubmitUpdate = async (
-    e: FormEvent<HTMLFormElement>,
-    contactId: string
-  ) => {
-    e.preventDefault();
-    if (formRef.current) {
-      const updatedContact = {
-        first_name: formRef.current.first_name.value,
-        last_name: formRef.current.last_name.value,
-        email: formRef.current.email.value,
-        birthdate: formRef.current.birthdate.value,
-        gender: formRef.current.gender.value,
-        language: formRef.current.language.value,
-      };
-
-      const csrfToken = Cookies.get('csrftoken');
-
-      try {
-        const response = await axios.post(
-          `https://leste-telecom-rrwtejtbla-rj.a.run.app/api/update_contact/${contactId}/`,
-          updatedContact,
-          {
-            headers: {
-              'X-CSRFToken': csrfToken,
-            },
-          }
-        );
-        alert('Contact updated successfully!');
-        window.location.reload();
-      } catch (error) {
-        console.error('Error updating contact:', error);
-      }
-    }
-  };
-
   useEffect(() => {
     if (currContactEdit.id) {
-      console.log(
-        '🚀 ~ file: ContactForm.tsx:71 ~ currContactEdit:',
-        currContactEdit
-      );
       setIContactFormOverlayActive(true);
       const {
         first_name,
@@ -143,13 +107,7 @@ const ContactForm = () => {
     <form
       ref={formRef}
       className="contactForm "
-      onSubmit={(e) => {
-        if (currContactEdit.id) {
-          handleFormSubmitUpdate(e, currContactEdit.id);
-        } else {
-          handleFormSubmitAdd(e);
-        }
-      }}
+      onSubmit={handleFormSubmit}
     >
       <IoMdClose
         className="absolute top-2 right-2 text-2xl cursor-pointer text-[#00997B]"
@@ -169,11 +127,11 @@ const ContactForm = () => {
             id="avatar"
             className="sr-only"
             onChange={handleAvatarImg}
+            ref={avatarInputRef}
           />
           <Image
             alt="Contact avatar"
             title="Contact Avatar"
-            ref={avatar}
             className="bg-white w-32 h-32 md:w-40 md:h-40 rounded-lg shadow-md hover:shadow-lg min-h-40 min-w-40 object-cover"
             height={160}
             width={160}

@@ -4,6 +4,7 @@ import { LiaBirthdayCakeSolid } from 'react-icons/lia';
 import { MdOutlineEmail } from 'react-icons/md';
 import { formatDate } from '@utils/formatDate';
 import { iContactCardInfo } from '@interfaces/index';
+import { useSystem } from '@context/useSystem';
 const ContactCardInfo = ({
   full_name,
   age,
@@ -11,6 +12,7 @@ const ContactCardInfo = ({
   birthdate,
   language,
 }: iContactCardInfo) => {
+  const { layoutMode, setLayoutMode }: any = useSystem();
   const enshortString = (string: string, maxlength: number) => {
     let new_string = string;
 
@@ -33,7 +35,7 @@ const ContactCardInfo = ({
         <span>
           <MdOutlineEmail className="text-base" />
         </span>
-        <span>{enshortString(email, 22)}</span>
+        <span>{layoutMode == 'grid' ? enshortString(email, 22) : email}</span>
       </div>
 
       <div className="cardInfo flex items-center gap-1 text-gray-500 text-sm">

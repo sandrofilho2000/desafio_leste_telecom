@@ -16,11 +16,9 @@ import { IoMdPersonAdd } from 'react-icons/io';
 import ContactFormOverlay from '@components/organisms/ContactFormOverlay';
 
 const HomePage = () => {
-  const [layoutMode, setLayoutMode] = useState('list');
   const {
+    layoutMode,
     firstLoad,
-    setFirstLoad,
-    searchContext,
     searchSkeletonOverlayActive,
     setIContactFormOverlayActive,
   }: any = useSystem();
@@ -45,12 +43,11 @@ const HomePage = () => {
       <main className="min-h-screen bg-[#e8ebea] pt-0">
         <Filters />
         <div className="top w-full flex justify-between  text-[#009373] px-4 md:px-16 lg:px-24 pt-0">
-          <h1 className="text-2xl md:text-4xl font-bold">CONTACTS</h1>
+          <h1 className="text-2xl md:text-4xl font-bold">
+            CONTACTS {contacts.length !== 0 && `(${contacts.length})`}{' '}
+          </h1>
 
-          <LayoutControl
-            layoutMode={layoutMode}
-            setLayoutMode={setLayoutMode}
-          />
+          <LayoutControl />
         </div>
 
         <div className="addContactButtonContact mt-4 md:mt-8 px-4 md:px-16 lg:px-24 pt-0">

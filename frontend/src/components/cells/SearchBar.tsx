@@ -1,5 +1,6 @@
 import { useSystem } from '@context/useSystem';
-import React from 'react';
+import { isObjectEmpty } from '@utils/isObjectEmpty';
+import React, { useEffect } from 'react';
 import { FaFilter } from 'react-icons/fa';
 
 const SearchBar = () => {
@@ -12,12 +13,12 @@ const SearchBar = () => {
   }: any = useSystem();
 
   var typingTimer: any;
-  let handleSkeletonOverlay = (slug: string) => {
+  let handleSearch = (slug: string) => {
     clearTimeout(typingTimer);
     setSearchSkeletonOverlayActive(true);
+
     typingTimer = setTimeout(() => {
       setSearchContext({ ...searchContext, slug: slug });
-      setSearchSkeletonOverlayActive(false);
     }, 2000);
   };
 
@@ -27,7 +28,7 @@ const SearchBar = () => {
         <input
           type="search"
           onChange={(e) => {
-            handleSkeletonOverlay(e.target.value);
+            handleSearch(e.target.value);
           }}
           className="w-full px-2 py-0.5 md:px-4 md:py-1 text-gray-800 rounded-full focus:outline-none bg-transparent"
           placeholder="Search..."
@@ -38,9 +39,12 @@ const SearchBar = () => {
           onClick={() => {
             setIsFilterActive(!isFilterActive);
           }}
-          className="flex items-center bg-[#009373] justify-center w-9 h-9 md:w-12 md:h-12 text-[#e8ebea] text-md rounded-r-md md:rounded-r-lg md:text-lg"
+          className="flex relative items-center bg-[#009373] justify-center w-9 h-9 md:w-12 md:h-12 text-[#e8ebea] text-md rounded-r-md md:rounded-r-lg md:text-lg"
         >
           <FaFilter />
+          {!isObjectEmpty(searchContext) && (
+            <div className="bg-red-500 absolute -top-1 -right-1 z-10 rounded-full w-3 h-3"></div>
+          )}
         </button>
       </div>
     </div>

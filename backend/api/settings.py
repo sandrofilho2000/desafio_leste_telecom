@@ -120,6 +120,9 @@ USE_TZ = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
+
+cors_allowed_origins_str = os.environ.get("CORS_ALLOWED_ORIGINS")
+CORS_ALLOWED_ORIGINS = cors_allowed_origins_str.split(",")
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
@@ -132,13 +135,12 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 from google.oauth2 import service_account
 
+
+DEFAULT_FILE_STORAGE = os.environ.get("DEFAULT_FILE_STORAGE")
+GS_BUCKET_NAME = os.environ.get("GS_BUCKET_NAME")
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
     os.path.join(BASE_DIR, "credentials.json")
 )
-
-DEFAULT_FILE_STORAGE = os.environ.get("DEFAULT_FILE_STORAGE")
-GS_PROJECT_ID = os.environ.get("GS_PROJECT_ID")
-GS_BUCKET_NAME = os.environ.get("GS_BUCKET_NAME")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

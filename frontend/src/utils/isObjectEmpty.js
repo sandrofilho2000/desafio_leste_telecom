@@ -1,3 +1,6 @@
 export function isObjectEmpty(obj) {
-  return Object.keys(obj).length === 0 && obj.constructor === Object;
+  return Object.values(obj).every(
+    (value) =>
+      value === '' || value === false || value === null || value === undefined
+  );
 }

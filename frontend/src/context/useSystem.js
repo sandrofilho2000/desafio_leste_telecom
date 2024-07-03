@@ -14,6 +14,8 @@ export const SystemContextProvider = ({ children }) => {
     useState(false);
   const [currContactEdit, setCurrContactEdit] = useState(false);
   const [firstLoad, setFirstLoad] = useState(true);
+  const [layoutMode, setLayoutMode] = useState('list');
+
   return (
     <systemContext.Provider
       value={{
@@ -29,6 +31,8 @@ export const SystemContextProvider = ({ children }) => {
         setIContactFormOverlayActive,
         currContactEdit,
         setCurrContactEdit,
+        layoutMode,
+        setLayoutMode,
       }}
     >
       {children}

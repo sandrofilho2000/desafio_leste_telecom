@@ -11,40 +11,41 @@ export const useContact = () => useContext(contactsContext);
 export const ContactContextProvider = ({ children }) => {
   const [contacts, setContacts] = useState([]);
   const [initialContacts, setInitialContacts] = useState([]);
-  const { searchContext, firstLoad, setFirstLoad } = useSystem();
+  const {
+    searchContext,
+    firstLoad,
+    setFirstLoad,
+    setSearchSkeletonOverlayActive,
+  } = useSystem();
 
   async function api(searchContext = null) {
-    const url = 'https://leste-telecom-rrwtejtbla-rj.a.run.app/api/contacts';
+    const url = 'http://localhost:8000/api/contacts';
+
     try {
       if (searchContext) {
-        const { slug, gender, language, birthMonth } = searchContext;
-        if (slug || gender || language || birthMonth) {
-          const { data } = await axios.get(url, { params: searchContext });
-          const { contacts: filteredContacts } = data;
-          setContacts(filteredContacts);
-          setFirstLoad(false);
-        } else if (!slug && !gender && !language && !birthMonth && !firstLoad) {
-          setContacts(initialContacts);
-        }
+        const { data } = await axios.get(url, { params: searchContext });
+        const { contacts: filteredContacts } = data;
+        setContacts(filteredContacts);
+        setFirstLoad(false);
       } else {
         const res = await axios.get(url);
         const { contacts } = res.data;
         setContacts(contacts);
         setInitialContacts(contacts);
       }
+      setSearchSkeletonOverlayActive(false);
     } catch (error) {
       console.log('Erro na requisição:', error);
       throw error;
+    } finally {
     }
   }
 
   useEffect(() => {
     if (!isObjectEmpty(searchContext)) {
       api(searchContext);
-      console.log(
-        '🚀 ~ file: useContact.js:44 ~ searchContext:',
-        searchContext
-      );
+    } else {
+      setContacts(initialContacts);
     }
   }, [searchContext]);
 
