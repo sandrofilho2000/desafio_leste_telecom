@@ -51,8 +51,8 @@ const ContactForm = () => {
 
       const csrfToken = Cookies.get('csrftoken');
       const url = currContactEdit.id
-        ? `https://api-server-desafio-leste-telecom.vercel.app/api/update_contact/${currContactEdit.id}/`
-        : 'https://api-server-desafio-leste-telecom.vercel.app/api/create_contact/';
+        ? `http://localhost:5000/api/update_contact/${currContactEdit.id}/`
+        : 'http://localhost:5000/api/create_contact/';
 
       try {
         const response = await axios.post(url, formData, {

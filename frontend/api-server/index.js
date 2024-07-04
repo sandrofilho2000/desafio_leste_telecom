@@ -39,37 +39,38 @@ app.post(
     const formData = req.body;
     const avatarFile = req.file;
 
-    const formDataToSend = new FormData();
-    formDataToSend.append('first_name', formData.first_name);
-    formDataToSend.append('last_name', formData.last_name);
-    formDataToSend.append('email', formData.email);
-    formDataToSend.append('birthdate', formData.birthdate);
-    formDataToSend.append('gender', formData.gender);
-    formDataToSend.append('language', formData.language);
-
-    if (avatarFile) {
-      const avatarData = fs.createReadStream(avatarFile.path);
-      formDataToSend.append('avatar', avatarData, {
-        filename: avatarFile.originalname,
-        contentType: avatarFile.mimetype,
-      });
-    }
     try {
+      const headers = {
+        Authorization: `Api-Key ${process.env.API_KEY}`,
+      };
+
+      const formDataToSend = new FormData();
+      Object.keys(formData).forEach((key) => {
+        formDataToSend.append(key, formData[key]);
+      });
+      if (avatarFile) {
+        formDataToSend.append(
+          'avatar',
+          avatarFile.buffer,
+          avatarFile.originalname
+        );
+      }
+
       const response = await axios.post(
-        `${API_URL}/update_contact/${contact_id}/`,
+        `${process.env.API_URL}/update_contact/${contact_id}/`,
         formDataToSend,
         {
           headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Api-Key ${API_KEY}`,
+            ...headers,
+            ...formDataToSend.getHeaders(),
           },
         }
       );
 
       res.status(200).json({ message: 'Contact updated successfully' });
     } catch (error) {
-      console.error('Req failed!:', error.message);
-      res.status(500).json({ error: 'Req failed!' });
+      console.error('Error updating contact:', error);
+      res.status(500).json({ error: 'Error updating contact' });
     }
   }
 );
