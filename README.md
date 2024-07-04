@@ -29,10 +29,6 @@
       <br />Typescript
     </td>
     <td align="center">
-      <img alt="React" src="https://github.com/devicons/devicon/blob/master/icons/react/react-original.svg" height="30" width="40">
-      <br />ReactJS
-    </td>
-    <td align="center">
       <img alt="Django" src="https://github.com/devicons/devicon/blob/master/icons/django/django-plain.svg" height="30" width="40">
       <br />Django
     </td>
@@ -53,10 +49,6 @@
     <td align="center">
       <img alt="Node.js" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" height="30" width="40">
       <br />Node.js
-    </td>
-    <td align="center">
-      <img alt="Node.js" src="https://github.com/devicons/devicon/blob/master/icons/djangorest/djangorest-original.svg" height="30" width="40">
-      <br />Django Rest Framework
     </td>
     <td align="center">
       <img alt="Google Cloud" src="https://github.com/devicons/devicon/blob/master/icons/googlecloud/googlecloud-original.svg" height="30" width="40">
