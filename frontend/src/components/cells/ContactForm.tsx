@@ -33,17 +33,18 @@ const ContactForm = () => {
       reader.readAsDataURL(file);
     }
   };
+  const today = new Date().toISOString().split('T')[0];
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (formRef.current) {
       const formData = new FormData();
-      formData.append('first_name', formRef.current.first_name.value);
-      formData.append('last_name', formRef.current.last_name.value);
-      formData.append('email', formRef.current.email.value);
-      formData.append('birthdate', formRef.current.birthdate.value);
-      formData.append('gender', formRef.current.gender.value);
-      formData.append('language', formRef.current.language.value);
+      formData.append('first_name', formRef.current.first_name.value.trim());
+      formData.append('last_name', formRef.current.last_name.value.trim());
+      formData.append('email', formRef.current.email.value.trim());
+      formData.append('birthdate', formRef.current.birthdate.value.trim());
+      formData.append('gender', formRef.current.gender.value.trim());
+      formData.append('language', formRef.current.language.value.trim());
 
       if (avatarInputRef.current?.files?.[0]) {
         formData.append('avatar', avatarInputRef.current.files[0]);
@@ -183,6 +184,7 @@ const ContactForm = () => {
               name="birthdate"
               id="birthdate"
               placeholder="Birthdate:"
+              max={today}
             />
           </div>
         </div>

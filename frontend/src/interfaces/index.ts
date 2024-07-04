@@ -14,7 +14,6 @@ export interface iContactItem {
 
 export interface iContactCardInfo extends Pick<iContactItem, 'email' | 'birthdate' | 'language'> {
     full_name: string;
-    age: number;
 }
 
 export interface iContactCardAvatar extends Pick<iContactItem, 'avatar' | 'gender'> {
