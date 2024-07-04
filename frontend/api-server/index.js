@@ -24,9 +24,10 @@ app.get('/api/contacts', async (req, res) => {
       },
       params: req.query,
     });
+    console.log(response.data);
     res.json(response.data);
   } catch (error) {
-    console.error('Req failed!:', error);
+    console.log('Req failed!:', error);
     res.status(500).json({ error: 'Req failed!' });
   }
 });
@@ -78,7 +79,6 @@ app.post(
 app.delete('/api/delete_contact/:contact_id/', async (req, res) => {
   try {
     const { contact_id } = req.params;
-    console.log('🚀 ~ file: index.js:124 ~ contact_id:', contact_id);
     const response = await axios.delete(
       `${API_URL}/delete_contact/${contact_id}/`,
       {
@@ -98,9 +98,6 @@ app.delete('/api/delete_contact/:contact_id/', async (req, res) => {
 app.post('/api/create_contact', upload.single('avatar'), async (req, res) => {
   const formData = req.body;
   const avatar = req.file;
-
-  console.log('🚀 ~ file: index.js:35 ~ formData:', formData);
-  console.log('🚀 ~ file: index.js:37 ~ avatar:', avatar);
 
   try {
     const headers = {

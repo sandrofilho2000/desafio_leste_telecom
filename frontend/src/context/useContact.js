@@ -19,7 +19,8 @@ export const ContactContextProvider = ({ children }) => {
   } = useSystem();
 
   async function api(searchContext = null) {
-    const url = 'http://localhost:5000/api/contacts';
+    const url =
+      'https://api-server-desafio-leste-telecom.vercel.app/api/contacts';
     try {
       if (searchContext) {
         const { data } = await axios.get(url, {
