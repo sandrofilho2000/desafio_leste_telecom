@@ -1,7 +1,7 @@
 import { useContact } from '@context/useContact';
 import { useSystem } from '@context/useSystem';
 import React, { useEffect, useRef, useState } from 'react';
-import { BsCalendar2Month } from 'react-icons/bs';
+import { BsCake2Fill, BsCalendar2Month } from 'react-icons/bs';
 import { ImManWoman } from 'react-icons/im';
 import { IoLanguage } from 'react-icons/io5';
 import { iContactItem } from '@interfaces/index';
@@ -47,7 +47,9 @@ const Filters = () => {
       gender: searchContext.gender,
       language: searchContext.language,
       birthMonth: searchContext.birthMonth,
+      age: searchContext.age,
     };
+
     if (formRef.current) {
       let gender = formRef.current.gender.value;
       context.gender = gender;
@@ -57,6 +59,9 @@ const Filters = () => {
 
       let birthMonth = formRef.current.birthMonth.value;
       context.birthMonth = birthMonth;
+
+      let age = formRef.current.age.value;
+      context.age = age;
 
       setSearchContext(context);
     }
@@ -124,12 +129,12 @@ const Filters = () => {
 
   return (
     <div
-      className={`lg:h-12 flex h-36 flex-col lg:flex-row items-center justify-center bg-[#F4F5F5] mb-8 px-8 md:px-16 lg:px-24 transition-all duration-300 z-10 ${
-        !isFilterActive && '-mt-36 lg:-mt-12'
+      className={`filters min-[1130px]:h-12 flex h-52 flex-col items-center justify-center bg-[#F4F5F5] mb-4 px-4 md:px-16 min-[1130px]:px-24 transition-all duration-300 z-10 ${
+        !isFilterActive && '-mt-52 min-[1130px]:-mt-12'
       }`}
     >
       <form
-        className="flex flex-col lg:flex-row w-full gap-2 lg:gap-4 relative justify-center lg:justify-start"
+        className="flex flex-col  min-[1130px]:flex-row w-full gap-2 lg:gap-4 relative justify-center lg:justify-start"
         ref={formRef}
         onChange={() => {
           handleSearch();
@@ -195,8 +200,19 @@ const Filters = () => {
           </select>
         </div>
 
+        <div className="ageSelect flex items-center text-[#00997B] gap-1">
+          <BsCake2Fill />
+          <input
+            type="number"
+            name="age"
+            id="age"
+            className="shadow-md rounded-md px-2 py-1"
+            placeholder="Select Max Age"
+          />
+        </div>
+
         <button
-          className="px-2 py-[6px] flex  bg-[#00997B] shadow-md rounded-md text-white text-sm absolute right-0 items-center"
+          className="px-2 py-[6px] flex  bg-[#00997B] shadow-md rounded-md max-w-[100px] ml-5 min-[1130px]:ml-0 text-white text-sm min-[1130px]:absolute min-[1130px]:right-0 items-center"
           type="reset"
           onClick={() => {
             setContacts(initialContacts);

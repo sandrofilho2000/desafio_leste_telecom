@@ -24,7 +24,6 @@ app.get('/api/contacts', async (req, res) => {
       },
       params: req.query,
     });
-    console.log(response.data);
     res.json(response.data);
   } catch (error) {
     console.log('Req failed!:', error);

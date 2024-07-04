@@ -1,19 +1,41 @@
-<h1 align="center">
+<h1>
   <img alt="Leste Telecom" title="Leste Telecom" src="./logo.png" width="200px" />
 </h1>
 
-<h3 align="center">
-  Desafio do Desenvolvimento
-</h3>
+![GitHub repo size](https://img.shields.io/github/repo-size/sandrofilho2000/desafio_leste_telecom?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/sandrofilho2000/desafio_leste_telecom?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/sandrofilho2000/desafio_leste_telecom?style=for-the-badge)
+![Bitbucket open issues](https://img.shields.io/bitbucket/issues/sandrofilho2000/desafio_leste_telecom?style=for-the-badge)
+![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/sandrofilho2000/desafio_leste_telecom?style=for-the-badge)
 
-<p align="center">
-  <a href="#computer-o-desafio">Descrição</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-entrega">Entrega</a>
-</p>
+  <div ><br>
+    <img align="center" alt="Teamlist-react" height="30" width="40" src="https://github.com/devicons/devicon/blob/master/icons/react/react-original.svg">
+    <img align="center" alt="Teamlist-next" height="40" width="40" src="https://github.com/devicons/devicon/blob/master/icons/nextjs/nextjs-original-wordmark.svg" style="border-radius: 50%; backgroud-color: white">
+    <img align="center" alt="Teamlist-django" height="30" width="40" src="https://github.com/devicons/devicon/blob/master/icons/django/django-plain.svg">
+    <img align="center" alt="Teamlist-Python" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg">
+    <img align="center" alt="Teamlist-php" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" />
+    <img align="center" alt="Teamlist-nodejs" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" />
+    <img align="center" alt="Teamlist-nodejs" height="30" width="40" src="https://github.com/devicons/devicon/blob/master/icons/googlecloud/googlecloud-original.svg" />
+    <img align="center" alt="Teamlist-Js" height="30" width="40" src="https://github.com/devicons/devicon/blob/master/icons/postgresql/postgresql-original.svg">
+  </div>
+<br />
 
-## :computer: O desafio
+## 🚀 Features criadas
 
-A aplicação que deverá ser desenvolvida é uma listagem de contatos, o **Leste Contact**.
+Meu projeto apresenta algumas features. Elas são:
+
+### Barra de pesquisa
+![searchbar](https://github.com/sandrofilho2000/desafio_leste_telecom/assets/75636911/ebd672d1-d2e9-40a5-b91e-c6eb512ec213)
+
+> A cada alteração no campo de pesquisa, o script reinicia, espera 2 segundos e faz uma busca pelo termo digitado ao banco de dados.
+
+### Controle de layout
+
+| Lista | Grade |
+|-----------|-----------|
+| ![localhost_3000_(iPhone 6_7_8)](https://github.com/sandrofilho2000/desafio_leste_telecom/assets/75636911/0d59cfb8-8cd5-4e64-8f58-6062211c50b2) | ![localhost_3000_(iPhone 6_7_8) (1)](https://github.com/sandrofilho2000/desafio_leste_telecom/assets/75636911/4151a952-8e37-48a4-8f0c-2ae08135033b)
+
+> A depender do gosto usuário é possível escolher entre dois modelos visualização dos contatos diferente
 
 Neste desafio deverá ser criado uma aplicação com todas as funcionalidades solicitadas e será utilizada para **avaliação dos cadadidatos** para a vaga de desenvolvimento da Leste Telecom.
 

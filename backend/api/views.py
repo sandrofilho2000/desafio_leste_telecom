@@ -1,13 +1,11 @@
-from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework.response import Response
-from rest_framework.exceptions import NotFound
-from rest_framework.permissions import AllowAny
 from contacts.models import Contact
 from contacts.serializers import ContactSerializer
 from django.views import View
 import calendar
-import json
+from django.utils import timezone
+from datetime import timedelta
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
@@ -29,7 +27,6 @@ class CreateContactView(View):
         try:
             data = request.POST.dict()
             avatar_file = request.FILES.get("avatar")
-            print("🚀 ~ file: views.py:32 ~ avatar_file:", avatar_file)
 
             new_contact = Contact(
                 first_name=data["first_name"],
@@ -103,6 +100,8 @@ class ContactDetailView(generics.GenericAPIView):
         gender = request.query_params.get("gender")
         language = request.query_params.get("language")
         birth_month = request.query_params.get("birthMonth")
+        age = request.query_params.get("age")
+
         birth_month_number = 0
         if birth_month:
             try:
@@ -121,6 +120,18 @@ class ContactDetailView(generics.GenericAPIView):
             queryset = queryset.filter(language__icontains=language)
         if birth_month_number:
             queryset = queryset.filter(birthdate__month=birth_month_number)
+
+        if age:
+            try:
+                age = int(age) + 1
+                today = timezone.now().date()
+                min_birth_date = today - timedelta(
+                    days=age * 365.25
+                )  # Approximation of age in days
+                queryset = queryset.filter(birthdate__gte=min_birth_date)
+            except ValueError:
+                print("Invalid age value")
+                pass
 
         contacts = self.get_serializer(queryset, many=True).data
 
