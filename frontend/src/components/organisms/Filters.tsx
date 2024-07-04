@@ -5,6 +5,7 @@ import { BsCake2Fill, BsCalendar2Month } from 'react-icons/bs';
 import { ImManWoman } from 'react-icons/im';
 import { IoLanguage } from 'react-icons/io5';
 import { iContactItem } from '@interfaces/index';
+import { LiaBirthdayCakeSolid } from 'react-icons/lia';
 
 interface iLanguage {
   language: string;
@@ -201,7 +202,7 @@ const Filters = () => {
         </div>
 
         <div className="ageSelect flex items-center text-[#00997B] gap-1">
-          <BsCake2Fill />
+          <LiaBirthdayCakeSolid />
           <input
             type="number"
             name="age"
