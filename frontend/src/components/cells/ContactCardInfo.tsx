@@ -41,7 +41,7 @@ const ContactCardInfo = ({
   return (
     <div className="contactCardInfo flex flex-col items-start gap-1">
       <h2 className="w-full flex-none text-lg text-[#009373] font-bold leading-none">
-        {full_name} ({calculateAge(birthdate)})
+        {full_name} ({calculateAge(birthdate)}y)
       </h2>
 
       <div

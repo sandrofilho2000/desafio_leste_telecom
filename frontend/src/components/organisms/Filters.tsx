@@ -6,6 +6,21 @@ import { ImManWoman } from 'react-icons/im';
 import { IoLanguage } from 'react-icons/io5';
 import { iContactItem } from '@interfaces/index';
 
+interface iLanguage {
+  language: string;
+  qtn: number;
+}
+
+interface iGender {
+  gender: string;
+  qtn: number;
+}
+
+interface iMonth {
+  month: string;
+  qtn: number;
+}
+
 const Filters = () => {
   const {
     searchContext,
@@ -15,7 +30,9 @@ const Filters = () => {
     setIsFilterActive,
   }: any = useSystem();
 
-  const [languages, setLanguages] = useState<string[]>();
+  const [languages, setLanguages] = useState<iLanguage[]>();
+  const [genders, setGenders] = useState<iGender[]>();
+  const [birthMonths, setBirthMonths] = useState<iMonth[]>();
 
   const { setContacts, initialContacts }: any = useContact();
 
@@ -41,15 +58,11 @@ const Filters = () => {
       let birthMonth = formRef.current.birthMonth.value;
       context.birthMonth = birthMonth;
 
-      /* if (!gender && !language && !birthMonth) {
-        setContacts(initialContacts);
-      } */
-
       setSearchContext(context);
     }
   };
 
-  const months = [
+  const monthsArray = [
     'January',
     'February',
     'March',
@@ -65,14 +78,48 @@ const Filters = () => {
   ];
 
   useEffect(() => {
-    let list: any = [];
-    initialContacts.forEach((item: iContactItem) => {
-      if (!list.includes(item.language)) {
-        list.push(item.language);
-      }
-    });
+    let genderList: iGender[] = [];
+    let languageList: iLanguage[] = [];
+    let monthsList: { month: string; qtn: number }[] = Array.from(
+      { length: 12 },
+      (_, i) => ({ month: monthsArray[i], qtn: 0 })
+    );
 
-    setLanguages(list);
+    initialContacts.forEach((item: iContactItem) => {
+      const genderIndex = genderList.findIndex(
+        (langObj) => langObj.gender === item.gender
+      );
+
+      if (genderIndex !== -1) {
+        genderList[genderIndex].qtn += 1;
+      } else {
+        let obj = {
+          gender: item.gender,
+          qtn: 1,
+        };
+        genderList.push(obj);
+      }
+
+      const languageIndex = languageList.findIndex(
+        (langObj) => langObj.language === item.language
+      );
+
+      if (languageIndex !== -1) {
+        languageList[languageIndex].qtn += 1;
+      } else {
+        let obj = {
+          language: item.language,
+          qtn: 1,
+        };
+        languageList.push(obj);
+      }
+
+      const birthMonth = new Date(item.birthdate).getMonth();
+      monthsList[birthMonth].qtn += 1;
+    });
+    setGenders(genderList);
+    setLanguages(languageList);
+    setBirthMonths(monthsList);
   }, [initialContacts]);
 
   return (
@@ -96,8 +143,15 @@ const Filters = () => {
             className="shadow-md rounded-md px-2 py-1"
           >
             <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
+            {genders &&
+              genders.map((item, index: number) => (
+                <option
+                  key={index}
+                  value={item.gender.toLowerCase()}
+                >
+                  {item.gender} ({item.qtn})
+                </option>
+              ))}
           </select>
         </div>
 
@@ -113,9 +167,9 @@ const Filters = () => {
               languages.map((item, index: number) => (
                 <option
                   key={index}
-                  value={item.toLowerCase()}
+                  value={item.language.toLowerCase()}
                 >
-                  {item}
+                  {item.language} ({item.qtn})
                 </option>
               ))}
           </select>
@@ -129,14 +183,15 @@ const Filters = () => {
             className="shadow-md rounded-md px-2 py-1"
           >
             <option value="">Select Birth Month</option>
-            {months.map((month, index) => (
-              <option
-                key={index}
-                value={month}
-              >
-                {month}
-              </option>
-            ))}
+            {birthMonths &&
+              birthMonths.map((item, index) => (
+                <option
+                  key={index}
+                  value={item.month}
+                >
+                  {item.month} ({item.qtn})
+                </option>
+              ))}
           </select>
         </div>
 
