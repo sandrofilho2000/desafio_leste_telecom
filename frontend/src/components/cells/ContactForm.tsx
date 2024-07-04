@@ -61,8 +61,8 @@ const ContactForm = () => {
             'Content-Type': 'multipart/form-data',
           },
         });
-        /* alert('Contact saved successfully!');
-        window.location.reload(); */
+        alert('Contact saved successfully!');
+        window.location.reload();
       } catch (error) {
         console.error('Error saving contact:', error);
       }
