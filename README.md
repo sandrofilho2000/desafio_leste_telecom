@@ -1,7 +1,5 @@
 # Desafio Leste Telecom
 
-Link do [deploy](https://desafio-leste-telecom.vercel.app/)
-
 <h1>
   <img alt="Leste Telecom" title="Leste Telecom" src="./logo.png" width="200px" />
 </h1>
