@@ -19,11 +19,12 @@ export const ContactContextProvider = ({ children }) => {
   } = useSystem();
 
   async function api(searchContext = null) {
-    const url = 'https://leste-telecom-rrwtejtbla-rj.a.run.app/api/contacts';
-
+    const url = 'http://localhost:5000/api/contacts';
     try {
       if (searchContext) {
-        const { data } = await axios.get(url, { params: searchContext });
+        const { data } = await axios.get(url, {
+          params: searchContext,
+        });
         const { contacts: filteredContacts } = data;
         setContacts(filteredContacts);
         setFirstLoad(false);

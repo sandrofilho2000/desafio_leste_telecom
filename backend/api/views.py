@@ -12,6 +12,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework_api_key.permissions import HasAPIKey
 
 
 @method_decorator(ensure_csrf_cookie, name="dispatch")
@@ -22,7 +23,7 @@ class CSRFTokenView(View):
 
 @method_decorator(csrf_exempt, name="dispatch")
 class CreateContactView(View):
-    permission_classes = [AllowAny]
+    permission_classes = [HasAPIKey]
 
     def post(self, request, *args, **kwargs):
         try:
@@ -48,7 +49,7 @@ class CreateContactView(View):
 
 @method_decorator(csrf_exempt, name="dispatch")
 class UpdateContactView(View):
-    permission_classes = [AllowAny]
+    permission_classes = [HasAPIKey]
 
     def post(self, request, contact_id, *args, **kwargs):
         try:
@@ -75,7 +76,7 @@ class UpdateContactView(View):
 
 @method_decorator(csrf_exempt, name="dispatch")
 class DeleteContactView(View):
-    permission_classes = [AllowAny]
+    permission_classes = [HasAPIKey]
 
     def delete(self, request, contact_id, *args, **kwargs):
         try:
@@ -91,7 +92,7 @@ class DeleteContactView(View):
 class ContactDetailView(generics.GenericAPIView):
     serializer_class = ContactSerializer
     queryset = Contact.objects.all()
-    permission_classes = [AllowAny]
+    permission_classes = [HasAPIKey]
 
     def get(self, request, *args, **kwargs):
 
