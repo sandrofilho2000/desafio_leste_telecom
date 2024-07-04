@@ -1,3 +1,7 @@
+# Desafio Leste Telecom
+
+Link do [deploy](https://desafio-leste-telecom.vercel.app/)
+
 <h1>
   <img alt="Leste Telecom" title="Leste Telecom" src="./logo.png" width="200px" />
 </h1>
@@ -9,6 +13,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/sandrofilho2000/desafio_leste_telecom?style=for-the-badge)
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/sandrofilho2000/desafio_leste_telecom?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/sandrofilho2000/desafio_leste_telecom?style=for-the-badge)
+
 </div>
 
 <br />
