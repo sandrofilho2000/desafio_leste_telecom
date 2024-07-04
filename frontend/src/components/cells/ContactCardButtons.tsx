@@ -26,7 +26,7 @@ const ContactCardButtons = ({
     if (confirm('Do you really want to delete this contact?')) {
       try {
         const response = await axios.delete(
-          `https://leste-telecom-rrwtejtbla-rj.a.run.app/api/delete_contact/${contactId}/`,
+          `https://api-server-desafio-leste-telecom.vercel.app/api/delete_contact/${contactId}/`,
           {
             headers: {
               'X-CSRFToken': csrfToken,
@@ -49,7 +49,7 @@ const ContactCardButtons = ({
           setCurrContactEdit(contact);
         }}
         icon={<FaPencil />}
-        text={layoutMode === 'grid' ? `EDITAR` : ''}
+        text={layoutMode === 'grid' ? `EDIT` : ''}
       />
       <Button
         classes="bg-red-400 hover:bg-red-500 hover:border-red-500 border-red-300"
@@ -57,7 +57,7 @@ const ContactCardButtons = ({
         handlefunction={() => {
           handleContactDelete(contact.id);
         }}
-        text={layoutMode === 'grid' ? `DELETAR` : ''}
+        text={layoutMode === 'grid' ? `DELETE` : ''}
       />
     </div>
   );

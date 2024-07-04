@@ -29,6 +29,7 @@ class CreateContactView(View):
         try:
             data = request.POST.dict()
             avatar_file = request.FILES.get("avatar")
+            print("🚀 ~ file: views.py:32 ~ avatar_file:", avatar_file)
 
             new_contact = Contact(
                 first_name=data["first_name"],
