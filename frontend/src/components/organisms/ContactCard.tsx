@@ -18,7 +18,7 @@ const ContactCard = ({
 
   return (
     <div
-      className={`contactCard relative flex justify-between items-center sm:flex border  border-b-[#00937333] pb-4 ${
+      className={`contactCard relative flex justify-between items-center sm:flex border [&:last-of-type]:border-b-transparent  border-b-[#00937333] pb-4 ${
         layoutMode === 'list' ? 'listLayout' : 'gridLayout'
       }`}
     >
