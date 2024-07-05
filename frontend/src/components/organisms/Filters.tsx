@@ -131,11 +131,11 @@ const Filters = () => {
   return (
     <div
       className={`filters min-[1130px]:h-12 flex h-52 flex-col items-center justify-center bg-[#F4F5F5] mb-4 px-4 md:px-16 min-[1130px]:px-24 transition-all duration-300 z-10 ${
-        !isFilterActive && '-mt-52 min-[1130px]:-mt-12'
+        !isFilterActive && '-mt-52 min-[1130px]:-mt-12 opacity-0'
       }`}
     >
       <form
-        className="flex flex-col  min-[1130px]:flex-row w-full gap-2 lg:gap-4 relative justify-center lg:justify-start"
+        className="flex flex-col  min-[1130px]:flex-row w-full gap-2 min-[1130px]:gap-4 relative justify-center min-[1130px]:justify-start"
         ref={formRef}
         onChange={() => {
           handleSearch();
