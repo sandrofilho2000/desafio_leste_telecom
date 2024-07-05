@@ -19,17 +19,18 @@ export const ContactContextProvider = ({ children }) => {
   } = useSystem();
 
   async function api(searchContext = null) {
-    setSearchSkeletonOverlayActive(true);
     const url =
       'https://api-server-desafio-leste-telecom.vercel.app/api/contacts';
     try {
       if (searchContext) {
+        setSearchSkeletonOverlayActive(true);
         const { data } = await axios.get(url, {
           params: searchContext,
         });
         const { contacts: filteredContacts } = data;
         setContacts(filteredContacts);
         setFirstLoad(false);
+        setSearchSkeletonOverlayActive(false);
       } else {
         const res = await axios.get(url);
         const { contacts } = res.data;
@@ -40,7 +41,6 @@ export const ContactContextProvider = ({ children }) => {
       console.log('Erro na requisição:', error);
       throw error;
     } finally {
-      setSearchSkeletonOverlayActive(false);
     }
   }
 
