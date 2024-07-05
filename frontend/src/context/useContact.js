@@ -19,6 +19,7 @@ export const ContactContextProvider = ({ children }) => {
   } = useSystem();
 
   async function api(searchContext = null) {
+    setSearchSkeletonOverlayActive(true);
     const url =
       'https://api-server-desafio-leste-telecom.vercel.app/api/contacts';
     try {
@@ -35,11 +36,11 @@ export const ContactContextProvider = ({ children }) => {
         setContacts(contacts);
         setInitialContacts(contacts);
       }
-      setSearchSkeletonOverlayActive(false);
     } catch (error) {
       console.log('Erro na requisição:', error);
       throw error;
     } finally {
+      setSearchSkeletonOverlayActive(false);
     }
   }
 
